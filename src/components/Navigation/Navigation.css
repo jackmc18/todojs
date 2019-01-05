@@ -2,3 +2,10 @@ nav {
   display: flex;
   justify-content: flex-end;
 }
+
+p {
+  font-size: 1.25rem;
+  padding: .75rem;
+  margin-top: 5px;
+  text-decoration: underline;
+}
