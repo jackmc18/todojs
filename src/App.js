@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Navigation from './components/Navigation/Navigation';
+import SignIn from './components/SignIn/SignIn';
 import './App.css';
 
 const initialState = {
@@ -40,9 +41,7 @@ class App extends Component {
           </div>
           : (
             route === 'SignIn'
-              ? <div>
-                <h1>SignIn</h1>
-              </div>
+              ? <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
               : <div>
                 <h1>Register</h1>
               </div>
