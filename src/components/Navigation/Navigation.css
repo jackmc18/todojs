@@ -8,4 +8,5 @@ p {
   padding: .75rem;
   margin-top: 5px;
   text-decoration: underline;
+  cursor: pointer;
 }
