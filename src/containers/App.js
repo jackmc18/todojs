@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Navigation from './components/Navigation/Navigation';
-import SignIn from './components/SignIn/SignIn';
-import Register from './components/Register/Register'
+import Navigation from '../components/Navigation/Navigation';
+import SignIn from '../components/SignIn/SignIn';
+import Register from '../components/Register/Register'
 import './App.css';
 
 const initialState = {
