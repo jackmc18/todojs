@@ -8,9 +8,9 @@ class SignIn extends React.Component {
       signInPassword: ''
     }
   }
-  onEmailChange = (event) => {
-    this.setState({ signInEmail: event.target.value })
-  }
+  // onEmailChange = (event) => {
+  //   this.setState({ signInEmail: event.target.value })
+  // }
   onPasswordChange = (event) => {
     this.setState({ signInPassword: event.target.value })
   }
@@ -35,7 +35,7 @@ class SignIn extends React.Component {
   }
 
   render() {
-    const { onRouteChange } = this.props;
+    const { onRouteChange, onSignInEmailChange } = this.props;
     return (
       <article className="center">
         <main>
@@ -48,7 +48,8 @@ class SignIn extends React.Component {
                   type="email"
                   name="email-address"
                   id="email-address"
-                  onChange={this.onEmailChange}
+                  // onChange={this.onEmailChange}
+                  onChange={onSignInEmailChange}
                 />
               </div>
               <div>

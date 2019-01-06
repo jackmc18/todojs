@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Navigation from '../components/Navigation/Navigation';
 import SignIn from '../components/SignIn/SignIn';
 import Register from '../components/Register/Register'
 import './App.css';
+import { setSignInEmailField } from '../actions';
 
 const initialState = {
   route: 'SignIn',
@@ -12,6 +14,18 @@ const initialState = {
     name: '',
     email: '',
     joined: ''
+  }
+}
+
+const mapStateToProps = state => {
+  return {
+    signInEmail: state.signIn.signInEmail
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSignInEmailChange: (event) => dispatch(setSignInEmailField(event.target.value))
   }
 }
 
@@ -42,6 +56,7 @@ class App extends Component {
   }
 
   render() {
+    const { onSignInEmailChange } = this.props;
     const { isSignedIn, route } = this.state;
     return (
       <div className="App">
@@ -52,7 +67,7 @@ class App extends Component {
           </div>
           : (
             route === 'SignIn'
-              ? <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
+              ? <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange} onSignInEmailChange={onSignInEmailChange} />
               : <Register loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
           )
         }
@@ -61,4 +76,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect(mapStateToProps, mapDispatchToProps)(App);
