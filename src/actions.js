@@ -12,7 +12,15 @@ export const setSignInEmailField = (text) => {
   }
 }
 
-// export const requestSignIn = () => (dispatch) => {
-//   dispatch({ type: REQUEST_SIGNIN_PENDING });
-//   fetch('http://localhost:3000/')
-// }
+export const requestSignIn = () => (dispatch) => {
+  dispatch({ type: REQUEST_SIGNIN_PENDING });
+  fetch('http://localhost:3000/signin', {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      email: this.state.signInEmail,
+      password: this.state.signInPassword
+    })
+  })
+    .then(response => console.log(response.json()))
+}

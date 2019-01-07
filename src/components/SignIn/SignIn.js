@@ -8,9 +8,9 @@ class SignIn extends React.Component {
       signInPassword: ''
     }
   }
-  // onEmailChange = (event) => {
-  //   this.setState({ signInEmail: event.target.value })
-  // }
+  onEmailChange = (event) => {
+    this.setState({ signInEmail: event.target.value })
+  }
   onPasswordChange = (event) => {
     this.setState({ signInPassword: event.target.value })
   }
@@ -48,8 +48,8 @@ class SignIn extends React.Component {
                   type="email"
                   name="email-address"
                   id="email-address"
-                  // onChange={this.onEmailChange}
-                  onChange={onSignInEmailChange}
+                  onChange={this.onEmailChange}
+                // onChange={onSignInEmailChange}
                 />
               </div>
               <div>

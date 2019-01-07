@@ -7,7 +7,7 @@ import {
 
 
 const initialStateSignIn = {
-  isPending: false,
+  isSignInPending: false,
   user: {
     signInEmail: '',
     signInPassword: ''
@@ -24,11 +24,15 @@ export const signIn = (state = initialStateSignIn, action = {}) => {
   }
 }
 
-// export const requestSignIn = (state = initialStateSignIn, action = {}) => {
-//   switch (action.type) {
-//     case REQUEST_SIGNIN_PENDING:
-//       return Object.assign({}, state, { isPending: true });
-//     case REQUEST_SIGNIN_SUCCESS:
-//       return Object.assign({}, state, {})
-//   }
-// }
+export const requestSignIn = (state = initialStateSignIn, action = {}) => {
+  switch (action.type) {
+    case REQUEST_SIGNIN_PENDING:
+      return Object.assign({}, state, { isSignInPending: true });
+    case REQUEST_SIGNIN_SUCCESS:
+      return Object.assign({}, state, { isSignInPending: false });
+    case REQUEST_SIGNIN_FAILED:
+      return Object.assign({}, state, { error: action.payload, isPending: false });
+    default:
+      return state;
+  }
+}
