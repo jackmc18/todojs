@@ -1,11 +1,7 @@
 import React from "react";
 
-const SignIn = ({ signInEmailChange }) => {
-  return (
-    <div>
-      <input onChange={signInEmailChange} />
-    </div>
-  );
+const SignIn = () => {
+  return <div>SignIn</div>;
 };
 
 export default SignIn;
