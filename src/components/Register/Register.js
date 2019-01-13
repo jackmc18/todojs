@@ -1,27 +1,33 @@
 import React from "react";
 
-class SignIn extends React.Component {
+class Register extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      signInEmail: "",
-      signInPassword: ""
+      email: "",
+      password: "",
+      name: ""
     };
   }
-  onEmailChange = event => {
-    this.setState({ signInEmail: event.target.value });
-  };
-  onPasswordChange = event => {
-    this.setState({ signInPassword: event.target.value });
+  onNameChange = event => {
+    this.setState({ name: event.target.value });
   };
 
-  onSubmitSignIn = () => {
-    fetch("http://localhost:3000/signin", {
+  onEmailChange = event => {
+    this.setState({ email: event.target.value });
+  };
+  onPasswordChange = event => {
+    this.setState({ password: event.target.value });
+  };
+
+  onSubmitRegister = () => {
+    fetch("http://localhost:3000/register", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        email: this.state.signInEmail,
-        password: this.state.signInPassword
+        email: this.state.email,
+        password: this.state.password,
+        name: this.state.name
       })
     })
       .then(response => response.json())
@@ -34,13 +40,21 @@ class SignIn extends React.Component {
   };
 
   render() {
-    const { onRouteChange } = this.props;
     return (
       <article className="center">
         <main>
           <div>
             <fieldset id="sign_up">
-              <legend>Sign In</legend>
+              <legend>Register</legend>
+              <div>
+                <label htmlFor="name">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  onChange={this.onNameChange}
+                />
+              </div>
               <div>
                 <label htmlFor="email-address">Email</label>
                 <input
@@ -66,15 +80,10 @@ class SignIn extends React.Component {
             <div>
               <input
                 // the arrow function allows for the onRouteChange to not be called on render
-                onClick={this.onSubmitSignIn}
+                onClick={this.onSubmitRegister}
                 type="submit"
-                value="Sign in"
+                value="Register"
               />
-            </div>
-            <div>
-              <p onClick={() => onRouteChange("Register")} href="#0">
-                Register
-              </p>
             </div>
           </div>
         </main>
@@ -83,4 +92,4 @@ class SignIn extends React.Component {
   }
 }
 
-export default SignIn;
+export default Register;
