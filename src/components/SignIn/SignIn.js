@@ -1,11 +1,13 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       signInEmail: "",
-      signInPassword: ""
+      signInPassword: "",
+      isSignedIn: false
     };
   }
   onEmailChange = event => {
@@ -28,13 +30,25 @@ class SignIn extends React.Component {
       .then(user => {
         if (user.id) {
           this.props.loadUser(user);
-          this.props.onRouteChange("Home");
+          console.log("test");
+          this.setState({ isSignedIn: true });
+          console.log(`isSignedIn: ${this.state.isSignedIn}`);
+          // this.props.onRouteChange("Home");
+          // return <Redirect to="/boardList" />;
         }
       });
   };
 
   render() {
     const { onRouteChange } = this.props;
+    const { isSignedIn } = this.state;
+
+    if (isSignedIn) {
+      console.log("test2");
+      console.log(`isSignedIn: ${isSignedIn}`);
+      return <Redirect to="/boardList" />;
+    }
+
     return (
       <article className="center">
         <main>

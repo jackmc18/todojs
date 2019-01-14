@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { BrowserRouter, Route, Redirect } from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation";
 import SignIn from "./components/SignIn/SignIn";
 import Register from "./components/Register/Register";
+import BoardList from "./components/BoardList/BoardList";
 import "./App.css";
 
 const initialState = {
@@ -23,6 +25,7 @@ class App extends Component {
 
   loadUser = data => {
     this.setState({
+      isSignedIn: true,
       user: {
         id: data.id,
         name: data.name,
@@ -32,36 +35,25 @@ class App extends Component {
     });
   };
 
-  onRouteChange = route => {
-    if (route === "SignOut") {
-      this.setState(initialState);
-    } else if (route === "Home") {
-      this.setState({ isSignedIn: true });
-    }
-    this.setState({ route: route });
-  };
-
   render() {
-    const { isSignedIn, route } = this.state;
+    const { isSignedIn } = this.state;
+
     return (
-      <div className="App">
-        <Navigation
-          isSignedIn={isSignedIn}
-          onRouteChange={this.onRouteChange}
-        />
-        {route === "Home" ? (
-          <div>
-            <h1>Home</h1>
-          </div>
-        ) : route === "SignIn" ? (
-          <SignIn loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
-        ) : (
-          <Register
-            loadUser={this.loadUser}
-            onRouteChange={this.onRouteChange}
+      <BrowserRouter>
+        <div>
+          {/* <Navigation isSignedIn={isSignedIn} /> */}
+          <Route
+            path="/"
+            exact
+            render={props => <SignIn {...props} loadUser={this.loadUser} />}
           />
-        )}
-      </div>
+          <Route
+            path="/register"
+            render={props => <Register {...props} loadUser={this.loadUser} />}
+          />
+          <Route path="/boardList" component={BoardList} />
+        </div>
+      </BrowserRouter>
     );
   }
 }
