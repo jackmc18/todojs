@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation";
+import Home from "./components/Home/Home";
 import SignIn from "./components/SignIn/SignIn";
 import Register from "./components/Register/Register";
 import BoardList from "./components/BoardList/BoardList";
@@ -53,8 +54,9 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <Navigation isSignedIn={isSignedIn} signOut={this.onSignOut} />
+          <Route path="/" exact component={Home} />
           <Route
-            path="/"
+            path="/signin"
             exact
             render={props => <SignIn {...props} loadUser={this.loadUser} />}
           />

@@ -6,7 +6,7 @@ const Navigation = ({ isSignedIn, signOut }) => {
   if (isSignedIn) {
     return (
       <nav>
-        <Link to="/" onClick={signOut}>
+        <Link to="/signin" onClick={signOut}>
           Sign Out
         </Link>
       </nav>
@@ -14,7 +14,7 @@ const Navigation = ({ isSignedIn, signOut }) => {
   } else {
     return (
       <nav>
-        <Link to="/">SignIn</Link>
+        <Link to="/signin">SignIn</Link>
         <Link to="/register">Register</Link>
       </nav>
     );
