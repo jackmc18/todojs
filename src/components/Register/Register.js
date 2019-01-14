@@ -7,9 +7,11 @@ class Register extends React.Component {
     this.state = {
       email: "",
       password: "",
-      name: ""
+      name: "",
+      isSignedIn: false
     };
   }
+
   onNameChange = event => {
     this.setState({ name: event.target.value });
   };
@@ -17,6 +19,7 @@ class Register extends React.Component {
   onEmailChange = event => {
     this.setState({ email: event.target.value });
   };
+
   onPasswordChange = event => {
     this.setState({ password: event.target.value });
   };
@@ -35,13 +38,18 @@ class Register extends React.Component {
       .then(user => {
         if (user.id) {
           this.props.loadUser(user);
-          // this.props.onRouteChange("Home");
-          return <Redirect to="/boardsList" />;
+          this.setState({ isSignedIn: true });
         }
       });
   };
 
   render() {
+    const { isSignedIn } = this.state;
+
+    if (isSignedIn) {
+      return <Redirect to="/boardList" />;
+    }
+
     return (
       <article className="center">
         <main>

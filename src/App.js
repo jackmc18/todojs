@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { BrowserRouter, Route, Redirect } from "react-router-dom";
+import { BrowserRouter, Route } from "react-router-dom";
 import Navigation from "./components/Navigation/Navigation";
 import SignIn from "./components/SignIn/SignIn";
 import Register from "./components/Register/Register";
@@ -7,7 +7,6 @@ import BoardList from "./components/BoardList/BoardList";
 import "./App.css";
 
 const initialState = {
-  route: "SignIn",
   isSignedIn: false,
   user: {
     id: "",
@@ -35,13 +34,25 @@ class App extends Component {
     });
   };
 
+  onSignOut = () => {
+    this.setState({
+      isSignedIn: false,
+      user: {
+        id: "",
+        name: "",
+        email: "",
+        joined: ""
+      }
+    });
+  };
+
   render() {
     const { isSignedIn } = this.state;
 
     return (
       <BrowserRouter>
         <div>
-          {/* <Navigation isSignedIn={isSignedIn} /> */}
+          <Navigation isSignedIn={isSignedIn} signOut={this.onSignOut} />
           <Route
             path="/"
             exact

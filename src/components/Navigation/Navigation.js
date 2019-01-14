@@ -1,18 +1,21 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Navigation.css";
 
-const Navigation = ({ onRouteChange, isSignedIn }) => {
+const Navigation = ({ isSignedIn, signOut }) => {
   if (isSignedIn) {
     return (
       <nav>
-        <p onClick={() => onRouteChange("SignOut")}>Sign Out</p>
+        <Link to="/" onClick={signOut}>
+          Sign Out
+        </Link>
       </nav>
     );
   } else {
     return (
       <nav>
-        <p onClick={() => onRouteChange("SignIn")}>Sign In</p>
-        <p onClick={() => onRouteChange("Register")}>Register</p>
+        <Link to="/">SignIn</Link>
+        <Link to="/register">Register</Link>
       </nav>
     );
   }
