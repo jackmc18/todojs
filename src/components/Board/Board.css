@@ -8,6 +8,17 @@ li.card-list {
   width: 275px;
 }
 
-button.add-list {
+div.add-list {
   margin-top: 25px;
+}
+
+input.add-list {
+  padding: 0.5em 0.6em;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-shadow: inset 0 1px 3px #ddd;
+  border-radius: 4px;
+  vertical-align: middle;
+  box-sizing: border-box;
+  margin-right: 5px;
 }
