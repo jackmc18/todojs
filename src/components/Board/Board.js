@@ -4,14 +4,20 @@ import "./Board.css";
 
 const initialState = {
   boardName: "Untitled",
-  boardOwner: null,
-  cardLists: ["To Do", "Doing", "Done"],
+  boardId: null,
+  cardLists: [],
   addListToggle: false,
   addListName: ""
 };
 
 class Board extends React.Component {
   state = initialState;
+
+  componentDidMount() {
+    if (this.props.match.params.id === "default") {
+      this.setState({ cardLists: ["To Do", "Doing", "Done"] });
+    }
+  }
 
   onAddListToggle = () => {
     this.setState({ addListToggle: true });
@@ -29,9 +35,9 @@ class Board extends React.Component {
   };
 
   render() {
-    const cardLists = this.state.cardLists.map(cardList => {
+    const cardLists = this.state.cardLists.map((cardList, index) => {
       return (
-        <li className="card-list" key={cardList}>
+        <li className="card-list" key={index}>
           <CardList name={cardList} />
         </li>
       );

@@ -28,9 +28,9 @@ class CardList extends React.Component {
   render() {
     const { name } = this.props;
 
-    const cards = this.state.cards.map(card => {
+    const cards = this.state.cards.map((card, index) => {
       return (
-        <li className="cards" key={card}>
+        <li className="cards" key={index}>
           <Card content={card} />
         </li>
       );

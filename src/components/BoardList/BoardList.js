@@ -1,31 +1,27 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+const initialState = {
+  boards: []
+};
 
 class BoardList extends React.Component {
-  state = {
-    createBoardFlag: false
-  };
+  state = initialState;
 
   onCreateBoard = () => {
     this.setState({ createBoardFlag: true });
   };
 
   render() {
-    const { createBoardFlag } = this.state;
-
-    if (createBoardFlag) {
-      return <Redirect to="/board" />;
-    }
-
     return (
       <div>
         <h3>Board List</h3>
-        <button
+        <Link
+          to={{ pathname: "/board/default" }}
           className="pure-button pure-button-primary"
-          onClick={this.onCreateBoard}
         >
           CreateBoard
-        </button>
+        </Link>
       </div>
     );
   }
