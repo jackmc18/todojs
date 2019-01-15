@@ -65,6 +65,7 @@ class App extends Component {
             render={props => <Register {...props} loadUser={this.loadUser} />}
           />
           <Route path="/boardList" component={BoardList} />
+          <Route path="/board" component={Board} />
         </div>
       </BrowserRouter>
     );
