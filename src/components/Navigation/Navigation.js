@@ -6,9 +6,9 @@ const Navigation = ({ isSignedIn, signOut }) => {
   if (isSignedIn)
     return (
       <div className="pure-menu pure-menu-horizontal">
-        <a href="#" className="pure-menu-heading pure-menu-link">
+        <Link to="/" className="pure-menu-heading pure-menu-link">
           ORGANIZER
-        </a>
+        </Link>
         <ul className="pure-menu-list right">
           <li className="pure-menu-item">
             <Link to="/boardList" className="pure-menu-link">
@@ -26,9 +26,9 @@ const Navigation = ({ isSignedIn, signOut }) => {
 
   return (
     <div className="pure-menu pure-menu-horizontal">
-      <a href="#" className="pure-menu-heading pure-menu-link">
+      <Link to="/" className="pure-menu-heading pure-menu-link">
         ORGANIZER
-      </a>
+      </Link>
       <ul className="pure-menu-list right">
         <li className="pure-menu-item">
           <Link to="/register" className="pure-menu-link">
@@ -43,23 +43,6 @@ const Navigation = ({ isSignedIn, signOut }) => {
       </ul>
     </div>
   );
-
-  // if (isSignedIn) {
-  //   return (
-  //     <nav>
-  //       <Link to="/signin" onClick={signOut}>
-  //         Sign Out
-  //       </Link>
-  //     </nav>
-  //   );
-  // } else {
-  //   return (
-  //     <nav>
-  //       <Link to="/signin">SignIn</Link>
-  //       <Link to="/register">Register</Link>
-  //     </nav>
-  //   );
-  // }
 };
 
 export default Navigation;

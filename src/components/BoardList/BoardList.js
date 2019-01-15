@@ -20,7 +20,12 @@ class BoardList extends React.Component {
     return (
       <div>
         <h3>Board List</h3>
-        <button onClick={this.onCreateBoard}>CreateBoard</button>
+        <button
+          className="pure-button pure-button-primary"
+          onClick={this.onCreateBoard}
+        >
+          CreateBoard
+        </button>
       </div>
     );
   }
