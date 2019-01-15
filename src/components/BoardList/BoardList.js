@@ -1,13 +1,29 @@
 import React from "react";
-import CreateBoard from "../CreateBoard/CreateBoard";
+import { Redirect } from "react-router-dom";
 
-const BoardList = () => {
-  return (
-    <div>
-      <h3>Board List</h3>
-      <CreateBoard />
-    </div>
-  );
-};
+class BoardList extends React.Component {
+  state = {
+    createBoardFlag: false
+  };
+
+  onCreateBoard = () => {
+    this.setState({ createBoardFlag: true });
+  };
+
+  render() {
+    const { createBoardFlag } = this.state;
+
+    if (createBoardFlag) {
+      return <Redirect to="/board" />;
+    }
+
+    return (
+      <div>
+        <h3>Board List</h3>
+        <button onClick={this.onCreateBoard}>CreateBoard</button>
+      </div>
+    );
+  }
+}
 
 export default BoardList;
