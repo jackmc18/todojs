@@ -16,7 +16,7 @@ const Navigation = ({ isSignedIn, signOut }) => {
             </Link>
           </li>
           <li className="pure-menu-item">
-            <Link to="/signin" className="pure-menu-link">
+            <Link to="/signin" onClick={signOut} className="pure-menu-link">
               Sign Out
             </Link>
           </li>
