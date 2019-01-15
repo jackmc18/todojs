@@ -10,3 +10,7 @@ p {
   text-decoration: underline;
   cursor: pointer;
 }
+
+.pure-menu-list.right {
+  float: right;
+}
