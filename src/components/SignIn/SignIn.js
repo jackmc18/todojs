@@ -46,40 +46,39 @@ class SignIn extends React.Component {
       <article className="center">
         <main>
           <div>
-            <fieldset id="sign_up">
-              <legend>Sign In</legend>
-              <div>
-                <label htmlFor="email-address">Email</label>
+            <form className="pure-form pure-form-stacked">
+              <fieldset>
+                <legend>Sign In</legend>
+                <label htmlFor="email">Email</label>
                 <input
                   type="email"
                   name="email-address"
                   id="email-address"
+                  placeholder="Email"
                   onChange={this.onEmailChange}
                 />
-              </div>
-              <div>
+
                 <label htmlFor="password">Password</label>
                 <input
                   type="password"
                   name="password"
                   id="password"
+                  placeholder="Password"
                   onChange={this.onPasswordChange}
                 />
-              </div>
-              <label>
-                <input type="checkbox" /> Remember me
-              </label>
-            </fieldset>
+
+                <input
+                  type="button"
+                  value="Sign in"
+                  className="pure-button pure-button-primary"
+                  onClick={this.onSubmitSignIn}
+                />
+              </fieldset>
+            </form>
             <div>
-              <input
-                // the arrow function allows for the onRouteChange to not be called on render
-                onClick={this.onSubmitSignIn}
-                type="submit"
-                value="Sign in"
-              />
-            </div>
-            <div>
-              <Link to="/register">Register</Link>
+              <Link to="/register" className="pure-button pure-button-primary">
+                Register
+              </Link>
             </div>
           </div>
         </main>
