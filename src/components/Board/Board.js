@@ -1,5 +1,6 @@
 import React from "react";
 import CardList from "../CardList/CardList";
+import "./Board.css";
 
 const initialState = {
   boardName: "Untitled",
@@ -12,13 +13,17 @@ class Board extends React.Component {
 
   render() {
     const cardLists = this.state.cardLists.map(cardList => {
-      return <CardList name={cardList} />;
+      return (
+        <li className="card-list" key={cardList}>
+          <CardList name={cardList} />
+        </li>
+      );
     });
 
     return (
       <div>
         <h3>Board</h3>
-        {cardLists}
+        <ul className="card-list">{cardLists}</ul>
       </div>
     );
   }

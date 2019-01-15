@@ -1,0 +1,9 @@
+ul.card-list {
+  list-style: none;
+  display: flex;
+}
+
+li.card-list {
+  padding: 5px;
+  width: 275px;
+}
