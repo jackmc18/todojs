@@ -54,47 +54,44 @@ class Register extends React.Component {
       <article className="center">
         <main>
           <div>
-            <fieldset id="sign_up">
-              <legend>Register</legend>
-              <div>
+            <form className="pure-form pure-form-stacked">
+              <fieldset>
+                <legend>Register</legend>
                 <label htmlFor="name">Name</label>
                 <input
                   type="text"
                   name="name"
                   id="name"
+                  placeholder="Name"
                   onChange={this.onNameChange}
                 />
-              </div>
-              <div>
-                <label htmlFor="email-address">Email</label>
+
+                <label htmlFor="email">Email</label>
                 <input
                   type="email"
                   name="email-address"
                   id="email-address"
+                  placeholder="Email"
                   onChange={this.onEmailChange}
                 />
-              </div>
-              <div>
+
                 <label htmlFor="password">Password</label>
                 <input
                   type="password"
                   name="password"
                   id="password"
+                  placeholder="Password"
                   onChange={this.onPasswordChange}
                 />
-              </div>
-              <label>
-                <input type="checkbox" /> Remember me
-              </label>
-            </fieldset>
-            <div>
-              <input
-                // the arrow function allows for the onRouteChange to not be called on render
-                onClick={this.onSubmitRegister}
-                type="submit"
-                value="Register"
-              />
-            </div>
+
+                <input
+                  type="button"
+                  value="Register"
+                  className="pure-button pure-button-primary"
+                  onClick={this.onSubmitRegister}
+                />
+              </fieldset>
+            </form>
           </div>
         </main>
       </article>
