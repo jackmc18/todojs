@@ -7,3 +7,7 @@ li.card-list {
   padding: 5px;
   width: 275px;
 }
+
+button.add-list {
+  margin-top: 25px;
+}

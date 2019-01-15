@@ -23,7 +23,14 @@ class Board extends React.Component {
     return (
       <div>
         <h3>Board</h3>
-        <ul className="card-list">{cardLists}</ul>
+        <ul className="card-list">
+          {cardLists}
+          <li>
+            <button className="pure-button pure-button-primary add-list">
+              Add List
+            </button>
+          </li>
+        </ul>
       </div>
     );
   }
