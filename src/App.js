@@ -27,6 +27,10 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.checkAuth();
+  }
+
+  checkAuth = () => {
     const token = window.sessionStorage.getItem("token");
     if (token) {
       fetch("http://localhost:3000/signin", {
@@ -56,7 +60,7 @@ class App extends Component {
         })
         .catch(console.log);
     }
-  }
+  };
 
   loadUser = data => {
     this.setState({
