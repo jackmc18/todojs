@@ -50,13 +50,6 @@ class SignIn extends React.Component {
             });
         }
       });
-    // .then(response => response.json())
-    // .then(user => {
-    //   if (user.id) {
-    //     this.props.loadUser(user);
-    //     this.setState({ isSignedIn: true });
-    //   }
-    // });
   };
 
   render() {
