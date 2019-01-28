@@ -87,7 +87,7 @@ class App extends Component {
   };
 
   render() {
-    const { isSignedIn } = this.state;
+    const { isSignedIn, user } = this.state;
 
     return (
       <BrowserRouter>
@@ -103,7 +103,10 @@ class App extends Component {
             path="/register"
             render={props => <Register {...props} loadUser={this.loadUser} />}
           />
-          <Route path="/boardList" component={BoardList} />
+          <Route
+            path="/boardList"
+            render={props => <BoardList {...props} user={user} />}
+          />
           <Route name="board" path="/board/:id" component={Board} />
         </div>
       </BrowserRouter>

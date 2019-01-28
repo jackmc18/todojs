@@ -1,15 +1,35 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import "./CreateBoard.css";
 
 const initialState = {
   boards: [],
   createBoardFlag: false,
-  createBoardName: ""
+  createBoardName: "",
+  redirect: false
 };
 
 class BoardList extends React.Component {
   state = initialState;
+
+  componentDidMount() {
+    this.getBoards();
+  }
+
+  getBoards = () => {
+    const token = window.sessionStorage.getItem("token");
+    if (token) {
+      fetch(`http://localhost:3000/boardlist/`, {
+        method: "get",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        }
+      });
+    } else {
+      this.setState({ redirect: true });
+    }
+  };
 
   onCreateBoardToggle = () => {
     this.setState({ createBoardFlag: true });
@@ -27,6 +47,10 @@ class BoardList extends React.Component {
   };
 
   render() {
+    const { redirect } = this.state;
+    if (redirect) {
+      return <Redirect to="/signin" />;
+    }
     return (
       <div>
         <h3>Board List</h3>
