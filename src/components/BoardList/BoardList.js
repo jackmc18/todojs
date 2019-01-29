@@ -42,9 +42,24 @@ class BoardList extends React.Component {
 
   onCreateBoardConfirm = () => {
     this.setState({
-      createBoardToggle: false,
-      boards: [...this.state.boards, this.state.createBoardName]
+      createBoardToggle: false
+      // boards: [...this.state.boards, this.state.createBoardName]
     });
+    const token = window.sessionStorage.getItem("token");
+    if (token) {
+      fetch(`http://localhost:3000/createboard/`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        body: JSON.stringify({
+          boardName: this.state.createBoardName
+        })
+      });
+    } else {
+      this.setState({ redirect: true });
+    }
   };
 
   onCreateBoardNameChange = event => {
@@ -61,7 +76,7 @@ class BoardList extends React.Component {
         <h3>Board List</h3>
         <div>
           {boards.map(board => (
-            <div key={board.owner_id}>
+            <div key={board.board_id}>
               <BoardCard board={board} />
             </div>
           ))}
@@ -76,7 +91,7 @@ class BoardList extends React.Component {
             <Link
               onClick={this.onCreateBoardConfirm}
               to={{ pathname: `/board/${this.state.createBoardName}` }}
-              className="pure-button pure-button-primary"
+              className="pure-button pure-button-primary create-board"
             >
               CreateBoard
             </Link>
