@@ -38,7 +38,7 @@ class CardList extends React.Component {
     });
 
     return (
-      <div>
+      <div className="list">
         <h4>{name}</h4>
         <ul>{cards}</ul>
         {this.state.addCardToggle ? (
