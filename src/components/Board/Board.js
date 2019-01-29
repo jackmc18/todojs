@@ -14,10 +14,29 @@ class Board extends React.Component {
   state = initialState;
 
   componentDidMount() {
-    if (this.props.match.params.id === "default") {
-      this.setState({ cardLists: ["To Do", "Doing", "Done"] });
-    }
+    this.displayLists();
   }
+
+  displayLists = () => {
+    const { id } = this.props.match.params;
+    const token = window.sessionStorage.getItem("token");
+    if (token) {
+      fetch(`http://localhost:3000/getlists/`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        body: JSON.stringify({
+          boardId: id
+        })
+      })
+        .then(response => response.json())
+        .then(lists => {
+          this.setState({ boardId: id, cardLists: lists });
+        });
+    }
+  };
 
   onAddListToggle = () => {
     this.setState({ addListToggle: true });
@@ -25,9 +44,23 @@ class Board extends React.Component {
 
   onAddListConfirm = () => {
     this.setState({
-      addListToggle: false,
-      cardLists: [...this.state.cardLists, this.state.addListName]
+      addListToggle: false
+      // cardLists: [...this.state.cardLists, this.state.addListName]
     });
+    const token = window.sessionStorage.getItem("token");
+    if (token) {
+      fetch(`http://localhost:3000/createlist/`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        body: JSON.stringify({
+          listName: this.state.addListName,
+          boardId: this.state.boardId
+        })
+      });
+    }
   };
 
   onAddListNameChange = event => {
@@ -38,7 +71,7 @@ class Board extends React.Component {
     const cardLists = this.state.cardLists.map((cardList, index) => {
       return (
         <li className="card-list" key={index}>
-          <CardList name={cardList} />
+          <CardList name={cardList.list_name} />
         </li>
       );
     });
