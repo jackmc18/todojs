@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
+import BoardCard from "../BoardCard/BoardCard";
 import "./CreateBoard.css";
 
 const initialState = {
@@ -29,7 +30,6 @@ class BoardList extends React.Component {
         .then(resp => resp.json())
         .then(data => {
           this.setState({ boards: data });
-          this.displayBoards();
         });
     } else {
       this.setState({ redirect: true });
@@ -51,18 +51,21 @@ class BoardList extends React.Component {
     this.setState({ createBoardName: event.target.value });
   };
 
-  displayBoards = () => {
-    console.log("displaying boards");
-  };
-
   render() {
-    const { redirect } = this.state;
+    const { redirect, boards } = this.state;
     if (redirect) {
       return <Redirect to="/signin" />;
     }
     return (
       <div>
         <h3>Board List</h3>
+        <div>
+          {boards.map(board => (
+            <div key={board.owner_id}>
+              <BoardCard board={board} />
+            </div>
+          ))}
+        </div>
         {this.state.createBoardFlag ? (
           <div className="create-board">
             <input
