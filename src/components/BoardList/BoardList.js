@@ -25,7 +25,12 @@ class BoardList extends React.Component {
           "Content-Type": "application/json",
           Authorization: token
         }
-      });
+      })
+        .then(resp => resp.json())
+        .then(data => {
+          this.setState({ boards: data });
+          this.displayBoards();
+        });
     } else {
       this.setState({ redirect: true });
     }
@@ -44,6 +49,10 @@ class BoardList extends React.Component {
 
   onCreateBoardNameChange = event => {
     this.setState({ createBoardName: event.target.value });
+  };
+
+  displayBoards = () => {
+    console.log("displaying boards");
   };
 
   render() {
