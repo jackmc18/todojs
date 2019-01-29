@@ -8,3 +8,11 @@ input.create-board {
   box-sizing: border-box;
   margin-right: 5px;
 }
+
+.board-list {
+  margin: 3px;
+}
+
+.create-board {
+  margin-top: 10px;
+}

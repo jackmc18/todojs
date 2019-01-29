@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import BoardCard from "../BoardCard/BoardCard";
-import "./CreateBoard.css";
+import "./BoardList.css";
 
 const initialState = {
   boards: [],
@@ -57,7 +57,7 @@ class BoardList extends React.Component {
       return <Redirect to="/signin" />;
     }
     return (
-      <div>
+      <div className="board-list">
         <h3>Board List</h3>
         <div>
           {boards.map(board => (
@@ -85,7 +85,7 @@ class BoardList extends React.Component {
           <div className="create-board">
             <button
               onClick={this.onCreateBoardToggle}
-              className="pure-button pure-button-primary"
+              className="pure-button pure-button-primary create-board"
             >
               CreateBoard
             </button>
