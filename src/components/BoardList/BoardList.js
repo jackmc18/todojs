@@ -7,7 +7,7 @@ const initialState = {
   boards: [],
   createBoardFlag: false,
   createBoardName: "",
-  redirect: false
+  redirectToSignin: false
 };
 
 class BoardList extends React.Component {
@@ -32,7 +32,7 @@ class BoardList extends React.Component {
           this.setState({ boards: data });
         });
     } else {
-      this.setState({ redirect: true });
+      this.setState({ redirectToSignin: true });
     }
   };
 
@@ -58,7 +58,7 @@ class BoardList extends React.Component {
         })
       });
     } else {
-      this.setState({ redirect: true });
+      this.setState({ redirectToSignin: true });
     }
   };
 
@@ -67,8 +67,8 @@ class BoardList extends React.Component {
   };
 
   render() {
-    const { redirect, boards } = this.state;
-    if (redirect) {
+    const { redirectToSignin, boards } = this.state;
+    if (redirectToSignin) {
       return <Redirect to="/signin" />;
     }
     return (
@@ -76,9 +76,7 @@ class BoardList extends React.Component {
         <h3>Board List</h3>
         <div>
           {boards.map(board => (
-            <div key={board.board_id}>
-              <BoardCard board={board} />
-            </div>
+            <BoardCard key={board.board_id} board={board} />
           ))}
         </div>
         {this.state.createBoardFlag ? (
