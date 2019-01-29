@@ -77,7 +77,7 @@ class Board extends React.Component {
     });
 
     return (
-      <div>
+      <div className="scrolling-wrapper">
         <h3>Board</h3>
         <ul className="card-list">
           {cardLists}
