@@ -3,8 +3,10 @@ import CardList from "../CardList/CardList";
 import "./Board.css";
 
 const initialState = {
-  boardName: "Untitled",
-  boardId: null,
+  board: {
+    boardId: null,
+    boardName: "Untitled"
+  },
   cardLists: [],
   addListToggle: false,
   addListName: ""
@@ -32,8 +34,12 @@ class Board extends React.Component {
         })
       })
         .then(response => response.json())
-        .then(lists => {
-          this.setState({ boardId: id, cardLists: lists });
+        .then(board => {
+          console.log(board);
+          this.setState({
+            board: { boardId: board.boardId, boardName: board.boardName },
+            cardLists: board.lists
+          });
         });
     }
   };
@@ -71,7 +77,7 @@ class Board extends React.Component {
     const cardLists = this.state.cardLists.map((cardList, index) => {
       return (
         <li className="card-list" key={index}>
-          <CardList name={cardList.list_name} />
+          <CardList name={cardList.listName} />
         </li>
       );
     });
