@@ -77,37 +77,41 @@ class Board extends React.Component {
     });
 
     return (
-      <div className="scrolling-wrapper">
-        <h3>Board</h3>
-        <ul className="card-list">
-          {cardLists}
-          <li>
-            {this.state.addListToggle ? (
-              <div className="add-list">
-                <input
-                  className="add-list"
-                  placeholder="List Name"
-                  onChange={this.onAddListNameChange}
-                />
-                <button
-                  onClick={this.onAddListConfirm}
-                  className="pure-button pure-button-primary add-list"
-                >
-                  Add List
-                </button>
-              </div>
-            ) : (
-              <div className="add-list">
-                <button
-                  onClick={this.onAddListToggle}
-                  className="pure-button pure-button-primary add-list"
-                >
-                  Add List
-                </button>
-              </div>
-            )}
-          </li>
-        </ul>
+      <div className="board-wrapper">
+        <div className="scrolling-wrapper">
+          <h3>Board</h3>
+          <div className="list-wrapper">
+            <ul className="card-list">
+              {cardLists}
+              <li>
+                {this.state.addListToggle ? (
+                  <div className="add-list">
+                    <input
+                      className="add-list"
+                      placeholder="List Name"
+                      onChange={this.onAddListNameChange}
+                    />
+                    <button
+                      onClick={this.onAddListConfirm}
+                      className="pure-button pure-button-primary add-list"
+                    >
+                      Add List
+                    </button>
+                  </div>
+                ) : (
+                  <div className="add-list">
+                    <button
+                      onClick={this.onAddListToggle}
+                      className="pure-button pure-button-primary add-list"
+                    >
+                      Add List
+                    </button>
+                  </div>
+                )}
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     );
   }

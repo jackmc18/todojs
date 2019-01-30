@@ -91,7 +91,7 @@ class App extends Component {
 
     return (
       <BrowserRouter>
-        <div>
+        <div className="app-container">
           <Navigation isSignedIn={isSignedIn} signOut={this.onSignOut} />
           <Route path="/" exact component={Home} />
           <Route

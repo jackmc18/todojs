@@ -1,12 +1,22 @@
 .scrolling-wrapper {
-  display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
+  height: 100%;
   position: absolute;
-  top: 34px;
-  right: 0;
+  top: 0;
   bottom: 0;
+  right: 0;
   left: 0;
+  /* flex: 1 1 auto; */
+}
+
+.board-wrapper {
+  position: relative;
+  flex: 1 1 auto;
+}
+
+.list-wrapper {
+  display: flex;
 }
 
 ul.card-list {

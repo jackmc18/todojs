@@ -1,10 +1,19 @@
-/* body {
-  background-color: #052529;
-  color: #49e9a6;
-} */
+html,
+body,
+#app,
+#app > div,
+#root,
+.app-container {
+  height: 100%;
+}
 
 .App {
   text-align: center;
+}
+
+.app-container {
+  display: flex;
+  flex-flow: column;
 }
 
 .center {
