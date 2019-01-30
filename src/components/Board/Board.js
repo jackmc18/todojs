@@ -21,7 +21,7 @@ class Board extends React.Component {
     const { id } = this.props.match.params;
     const token = window.sessionStorage.getItem("token");
     if (token) {
-      fetch(`http://localhost:3000/getlists/`, {
+      fetch(`http://localhost:3000/getboard/`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
