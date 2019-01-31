@@ -35,7 +35,6 @@ class Board extends React.Component {
       })
         .then(response => response.json())
         .then(board => {
-          console.log(board);
           this.setState({
             board: { boardId: board.boardId, boardName: board.boardName },
             cardLists: board.lists

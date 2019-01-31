@@ -28,6 +28,10 @@ class CardList extends React.Component {
 
   render() {
     const { listName, cards } = this.props.cardList;
+    // cardList
+    // -listId
+    // -listName
+    // -cards
     console.log(this.props.cardList);
     const cardsMap = cards.map((card, index) => {
       return (

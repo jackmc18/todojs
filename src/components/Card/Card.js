@@ -9,6 +9,11 @@ class Card extends React.Component {
 
   componentDidMount() {
     const { card } = this.props;
+    // card
+    // -card_content
+    // -card_id
+    // -list_id
+    // -created
     this.setState({ content: card.card_content });
   }
 
