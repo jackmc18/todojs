@@ -77,7 +77,7 @@ class Board extends React.Component {
     const cardLists = this.state.cardLists.map((cardList, index) => {
       return (
         <li className="card-list" key={index}>
-          <CardList name={cardList.listName} />
+          <CardList cardList={cardList} />
         </li>
       );
     });

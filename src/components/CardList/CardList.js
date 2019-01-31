@@ -27,7 +27,7 @@ class CardList extends React.Component {
   };
 
   render() {
-    const { name } = this.props;
+    const { listName } = this.props.cardList;
 
     const cards = this.state.cards.map((card, index) => {
       return (
@@ -39,7 +39,7 @@ class CardList extends React.Component {
 
     return (
       <div className="list">
-        <h4>{name}</h4>
+        <h4>{listName}</h4>
         <ul>{cards}</ul>
         {this.state.addCardToggle ? (
           <div className="add-card">
