@@ -22,6 +22,7 @@ class Board extends React.Component {
   displayLists = () => {
     const { id } = this.props.match.params;
     const token = window.sessionStorage.getItem("token");
+    console.log("id:", id);
     if (token) {
       fetch(`http://localhost:3000/getboard/`, {
         method: "post",
@@ -35,6 +36,7 @@ class Board extends React.Component {
       })
         .then(response => response.json())
         .then(board => {
+          console.log(board);
           this.setState({
             board: { boardId: board.boardId, boardName: board.boardName },
             cardLists: board.lists
@@ -62,9 +64,13 @@ class Board extends React.Component {
         },
         body: JSON.stringify({
           listName: this.state.addListName,
-          boardId: this.state.boardId
+          boardId: this.state.board.boardId
         })
-      });
+      })
+        .then(resp => resp.json())
+        .then(resp => {
+          console.log("response:", resp);
+        });
     }
   };
 
@@ -73,6 +79,7 @@ class Board extends React.Component {
   };
 
   render() {
+    const { board } = this.state;
     const cardLists = this.state.cardLists.map((cardList, index) => {
       return (
         <li className="card-list" key={index}>
@@ -84,7 +91,7 @@ class Board extends React.Component {
     return (
       <div className="board-wrapper">
         <div className="scrolling-wrapper">
-          <h3>Board</h3>
+          <h3>{board.boardName}</h3>
           <div className="list-wrapper">
             <ul className="card-list">
               {cardLists}

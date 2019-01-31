@@ -7,7 +7,9 @@ const initialState = {
   boards: [],
   createBoardFlag: false,
   createBoardName: "",
-  redirectToSignin: false
+  redirectToSignin: false,
+  redirectToCreated: false,
+  createdId: null
 };
 
 class BoardList extends React.Component {
@@ -56,7 +58,11 @@ class BoardList extends React.Component {
         body: JSON.stringify({
           boardName: this.state.createBoardName
         })
-      });
+      })
+        .then(resp => resp.json())
+        .then(boardId => {
+          this.setState({ createdId: boardId, redirectToCreated: true });
+        });
     } else {
       this.setState({ redirectToSignin: true });
     }
@@ -67,9 +73,16 @@ class BoardList extends React.Component {
   };
 
   render() {
-    const { redirectToSignin, boards } = this.state;
+    const {
+      redirectToSignin,
+      redirectToCreated,
+      boards,
+      createdId
+    } = this.state;
     if (redirectToSignin) {
       return <Redirect to="/signin" />;
+    } else if (redirectToCreated) {
+      return <Redirect to={`/board/${createdId}`} />;
     }
     return (
       <div className="board-list">
@@ -86,13 +99,13 @@ class BoardList extends React.Component {
               placeholder="Board Name"
               onChange={this.onCreateBoardNameChange}
             />
-            <Link
+            <button
               onClick={this.onCreateBoardConfirm}
-              to={{ pathname: `/board/${this.state.createBoardName}` }}
+              //to={{ pathname: `/board/${this.state.createBoardName}` }}
               className="pure-button pure-button-primary create-board"
             >
               CreateBoard
-            </Link>
+            </button>
           </div>
         ) : (
           <div className="create-board">
