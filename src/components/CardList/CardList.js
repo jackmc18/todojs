@@ -32,7 +32,6 @@ class CardList extends React.Component {
     // -listId
     // -listName
     // -cards
-    console.log(this.props.cardList);
     const cardsMap = cards.map((card, index) => {
       return (
         <li className="cards" key={index}>
