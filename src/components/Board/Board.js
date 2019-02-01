@@ -68,8 +68,13 @@ class Board extends React.Component {
         })
       })
         .then(resp => resp.json())
-        .then(resp => {
-          console.log("response:", resp);
+        .then(list => {
+          this.setState({
+            cardLists: [
+              ...this.state.cardLists,
+              { cards: [], listId: list.list_id, listName: list.list_name }
+            ]
+          });
         });
     }
   };
