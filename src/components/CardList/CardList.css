@@ -1,3 +1,8 @@
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
 input.add-card {
   padding: 0.5em 0.6em;
   display: inline-block;
@@ -17,6 +22,20 @@ input.add-card {
   color: rgba(0, 0, 0, 0.8);
   border: 1px solid #999;
   border: transparent;
+  background-color: #e6e6e6;
+  text-decoration: none;
+  border-radius: 2px;
+  list-style: none;
+}
+
+.card {
+  font-family: inherit;
+  font-size: 100%;
+  padding: 0.5em 1em;
+  margin: 2px 0px;
+  color: #444;
+  color: rgba(0, 0, 0, 0.8);
+  border: 1px solid rgb(117, 117, 117);
   background-color: #e6e6e6;
   text-decoration: none;
   border-radius: 2px;
