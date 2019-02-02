@@ -22,7 +22,6 @@ class Board extends React.Component {
   displayLists = () => {
     const { id } = this.props.match.params;
     const token = window.sessionStorage.getItem("token");
-    console.log("id:", id);
     if (token) {
       fetch(`http://localhost:3000/getboard/`, {
         method: "post",
@@ -36,7 +35,6 @@ class Board extends React.Component {
       })
         .then(response => response.json())
         .then(board => {
-          console.log(board);
           this.setState({
             board: { boardId: board.boardId, boardName: board.boardName },
             cardLists: board.lists

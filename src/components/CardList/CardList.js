@@ -3,6 +3,8 @@ import Card from "../Card/Card";
 import "./CardList.css";
 
 const initialState = {
+  listName: "",
+  listId: null,
   cards: [],
   addCardToggle: false,
   addCardContent: ""
@@ -11,15 +13,52 @@ const initialState = {
 class CardList extends React.Component {
   state = initialState;
 
+  componentDidMount() {
+    this.setState({
+      cards: this.props.cardList.cards,
+      listName: this.props.cardList.listName,
+      listId: this.props.cardList.listId
+    });
+  }
+
   onAddCardToggle = () => {
     this.setState({ addCardToggle: true });
   };
 
   onAddCardConfirm = () => {
-    this.setState({
-      addCardToggle: false,
-      cards: [...this.state.cards, this.state.addCardContent]
-    });
+    const token = window.sessionStorage.getItem("token");
+    console.log(this.props.cardList);
+    if (token) {
+      fetch(`http://localhost:3000/createcard`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        body: JSON.stringify({
+          cardContent: this.state.addCardContent,
+          listId: this.props.cardList.listId
+        })
+      })
+        .then(response => response.json())
+        .then(card => {
+          console.log("returned card:", card);
+          this.setState({
+            addCardContent: "",
+            addCardToggle: false,
+            cards: [
+              ...this.state.cards,
+              {
+                cardContent: card.card_content,
+                cardId: card.card_id,
+                created: card.created,
+                listId: card.list_id
+              }
+            ]
+          });
+          console.log("state.cards:", this.state.cards);
+        });
+    }
   };
 
   onAddCardNameChange = event => {
@@ -27,7 +66,7 @@ class CardList extends React.Component {
   };
 
   render() {
-    const { listName, cards } = this.props.cardList;
+    const { listName, cards } = this.state;
     // cardList
     // -listId
     // -listName
