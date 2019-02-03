@@ -2,7 +2,8 @@ import React from "react";
 
 const initialState = {
   cardId: null,
-  content: ""
+  content: "",
+  isHovering: false
 };
 
 class Card extends React.Component {
@@ -18,8 +19,25 @@ class Card extends React.Component {
     this.setState({ cardId: card.cardId, content: card.cardContent });
   }
 
+  handleMouseHover = () => {
+    this.setState(this.toggleHoverState);
+  };
+
+  toggleHoverState = state => {
+    return {
+      isHovering: !state.isHovering
+    };
+  };
+
   render() {
-    return <div>{this.state.content}</div>;
+    return (
+      <div
+        onMouseEnter={this.handleMouseHover}
+        onMouseLeave={this.handleMouseHover}
+      >
+        {this.state.content}
+      </div>
+    );
   }
 }
 
