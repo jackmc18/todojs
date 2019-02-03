@@ -1,4 +1,5 @@
 import React from "react";
+import DeleteIcon from "../Icons/DeleteIcon";
 
 const initialState = {
   cardId: null,
@@ -35,7 +36,14 @@ class Card extends React.Component {
         onMouseEnter={this.handleMouseHover}
         onMouseLeave={this.handleMouseHover}
       >
-        {this.state.content}
+        {this.state.isHovering ? (
+          <div>
+            <div className="content">{this.state.content}</div>
+            <DeleteIcon />
+          </div>
+        ) : (
+          <div className="conent">{this.state.content}</div>
+        )}
       </div>
     );
   }
