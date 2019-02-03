@@ -64,10 +64,7 @@ class CardList extends React.Component {
 
   render() {
     const { listName, cards } = this.state;
-    // cardList
-    // -listId
-    // -listName
-    // -cards
+
     const cardsMap = cards.map((card, index) => {
       return (
         <li className="card" key={index}>
@@ -82,7 +79,7 @@ class CardList extends React.Component {
         <ul>{cardsMap}</ul>
         {this.state.addCardToggle ? (
           <div className="add-card">
-            <input
+            <textarea
               className="add-card"
               placeholder="Card Content"
               onChange={this.onAddCardNameChange}
