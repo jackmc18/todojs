@@ -1,6 +1,7 @@
 import React from "react";
 
 const initialState = {
+  cardId: null,
   content: ""
 };
 
@@ -14,7 +15,7 @@ class Card extends React.Component {
     // -cardId
     // -listId
     // -created
-    this.setState({ content: card.cardContent });
+    this.setState({ cardId: card.cardId, content: card.cardContent });
   }
 
   render() {
