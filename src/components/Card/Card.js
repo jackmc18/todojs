@@ -39,7 +39,10 @@ class Card extends React.Component {
         headers: {
           "Content-Type": "application/json",
           Authorization: token
-        }
+        },
+        body: JSON.stringify({
+          cardId: this.state.cardId
+        })
       });
     }
   };
