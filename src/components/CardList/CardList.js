@@ -67,7 +67,7 @@ class CardList extends React.Component {
 
     const cardsMap = cards.map((card, index) => {
       return (
-        <li className="card" key={index}>
+        <li key={index}>
           <Card card={card} />
         </li>
       );

@@ -29,7 +29,6 @@ input.add-card {
 
 .list {
   font-family: inherit;
-  font-size: 100%;
   padding: 0.5em 1em;
   color: #444;
   color: rgba(0, 0, 0, 0.8);
@@ -43,8 +42,7 @@ input.add-card {
 
 .card {
   font-family: inherit;
-  font-size: 100%;
-  padding: 0.5em 1em;
+  min-height: 30px;
   margin: 2px 0px;
   color: #444;
   color: rgba(0, 0, 0, 0.8);
