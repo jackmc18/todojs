@@ -21,14 +21,12 @@ class Card extends React.Component {
     this.setState({ cardId: card.cardId, content: card.cardContent });
   }
 
-  handleMouseHover = () => {
-    this.setState(this.toggleHoverState);
+  handleMouseEnter = () => {
+    this.setState({ isHovering: true });
   };
 
-  toggleHoverState = state => {
-    return {
-      isHovering: !state.isHovering
-    };
+  handleMouseLeave = () => {
+    this.setState({ isHovering: false });
   };
 
   handleDeleteCard = () => {
@@ -51,8 +49,8 @@ class Card extends React.Component {
     return (
       <div
         className="card"
-        onMouseEnter={this.handleMouseHover}
-        onMouseLeave={this.handleMouseHover}
+        onMouseEnter={this.handleMouseEnter}
+        onMouseLeave={this.handleMouseLeave}
       >
         {this.state.isHovering ? (
           <div style={{ position: "relative" }}>
