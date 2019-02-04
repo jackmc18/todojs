@@ -31,6 +31,19 @@ class Card extends React.Component {
     };
   };
 
+  handleDeleteCard = () => {
+    const token = window.sessionStorage.getItem("token");
+    if (token) {
+      fetch("http://localhost:3000/deletecard/", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        }
+      });
+    }
+  };
+
   render() {
     return (
       <div
@@ -41,7 +54,7 @@ class Card extends React.Component {
         {this.state.isHovering ? (
           <div style={{ position: "relative" }}>
             <div className="content">{this.state.content}</div>
-            <div className="edit-card">
+            <div onClick={() => this.handleDeleteCard()} className="edit-card">
               <DeleteIcon />
             </div>
           </div>
