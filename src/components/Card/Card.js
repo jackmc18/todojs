@@ -41,6 +41,9 @@ class Card extends React.Component {
         body: JSON.stringify({
           cardId: this.state.cardId
         })
+      }).then(() => {
+        console.log("finished");
+        this.props.onDeleteCard(this.state.cardId);
       });
     }
   };
