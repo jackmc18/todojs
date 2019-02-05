@@ -27,7 +27,7 @@ class CardList extends React.Component {
 
   onAddCardConfirm = () => {
     const token = window.sessionStorage.getItem("token");
-    const newCardPos = this.state.cards.length + 1;
+    const newCardPos = this.state.cards.length;
     if (token) {
       fetch(`http://localhost:3000/createcard`, {
         method: "post",
@@ -52,6 +52,7 @@ class CardList extends React.Component {
                 cardContent: card.card_content,
                 cardId: card.card_id,
                 created: card.created,
+                cardPosition: newCardPos,
                 listId: card.list_id
               }
             ]
@@ -62,6 +63,13 @@ class CardList extends React.Component {
 
   onDeleteCard = deletedPosition => {
     console.log("deleting card from cardlist at position:", deletedPosition);
+    let newCards = this.state.cards.map(card => {
+      if (card.cardPosition === deletedPosition) {
+        console.log("Need to delete:", card);
+      }
+      return card;
+    });
+    console.log(newCards);
   };
 
   onAddCardNameChange = event => {
