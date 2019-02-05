@@ -61,15 +61,12 @@ class CardList extends React.Component {
     }
   };
 
-  onDeleteCard = deletedPosition => {
-    console.log("deleting card from cardlist at position:", deletedPosition);
-    let newCards = this.state.cards.map(card => {
-      if (card.cardPosition === deletedPosition) {
-        console.log("Need to delete:", card);
-      }
-      return card;
+  onDeleteCard = cardId => {
+    this.setState({
+      cards: this.state.cards.filter(card => {
+        return card.cardId !== cardId;
+      })
     });
-    console.log(newCards);
   };
 
   onAddCardNameChange = event => {

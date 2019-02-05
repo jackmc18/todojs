@@ -13,18 +13,34 @@ class Card extends React.Component {
   state = initialState;
 
   componentDidMount() {
+    this.handleUpdateCardState();
+  }
+
+  componentDidUpdate() {
+    this.handleUpdateCardState();
+  }
+
+  handleUpdateCardState = () => {
     const { card } = this.props;
+    const { cardId, content, position } = this.state;
     // card
     // -cardContent
     // -cardId
+    // -cardPosition
     // -listId
     // -created
-    this.setState({
-      cardId: card.cardId,
-      content: card.cardContent,
-      position: card.cardPosition
-    });
-  }
+    if (
+      card.cardId !== cardId ||
+      card.cardContent !== content ||
+      card.cardPosition !== position
+    ) {
+      this.setState({
+        cardId: card.cardId,
+        content: card.cardContent,
+        position: card.cardPosition
+      });
+    }
+  };
 
   handleMouseEnter = () => {
     this.setState({ isHovering: true });
@@ -47,8 +63,7 @@ class Card extends React.Component {
           cardId: this.state.cardId
         })
       }).then(() => {
-        console.log("finished");
-        this.props.onDeleteCard(this.state.position);
+        this.props.onDeleteCard(this.state.cardId);
       });
     }
   };
