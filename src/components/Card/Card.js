@@ -5,6 +5,7 @@ import "./Card.css";
 const initialState = {
   cardId: null,
   content: "",
+  position: null,
   isHovering: false
 };
 
@@ -18,7 +19,11 @@ class Card extends React.Component {
     // -cardId
     // -listId
     // -created
-    this.setState({ cardId: card.cardId, content: card.cardContent });
+    this.setState({
+      cardId: card.cardId,
+      content: card.cardContent,
+      position: card.cardPosition
+    });
   }
 
   handleMouseEnter = () => {
@@ -43,7 +48,7 @@ class Card extends React.Component {
         })
       }).then(() => {
         console.log("finished");
-        this.props.onDeleteCard(this.state.cardId);
+        this.props.onDeleteCard(this.state.position);
       });
     }
   };
