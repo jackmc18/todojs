@@ -27,6 +27,7 @@ class CardList extends React.Component {
 
   onAddCardConfirm = () => {
     const token = window.sessionStorage.getItem("token");
+    const newCardPos = this.state.cards.length + 1;
     if (token) {
       fetch(`http://localhost:3000/createcard`, {
         method: "post",
@@ -36,7 +37,8 @@ class CardList extends React.Component {
         },
         body: JSON.stringify({
           cardContent: this.state.addCardContent,
-          listId: this.props.cardList.listId
+          listId: this.props.cardList.listId,
+          cardPosition: newCardPos
         })
       })
         .then(response => response.json())
