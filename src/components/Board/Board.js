@@ -62,6 +62,7 @@ class Board extends React.Component {
         },
         body: JSON.stringify({
           listName: this.state.addListName,
+          listPosition: this.state.cardLists.length,
           boardId: this.state.board.boardId
         })
       })
