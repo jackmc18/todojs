@@ -24,12 +24,18 @@ class CardList extends React.Component {
 
   handleUpdateListState = () => {
     const { cardList } = this.props;
-    const { listId, listName } = this.state;
-    if (cardList.listId !== listId || cardList.listName !== listName) {
+    const { listId, listName, cards } = this.state;
+    if (
+      cardList.listId !== listId ||
+      cardList.listName !== listName ||
+      cardList.cards !== cards
+    ) {
       this.setState({
         cards: cardList.cards,
         listName: cardList.listName,
-        listId: cardList.listId
+        listId: cardList.listId,
+        addCardToggle: false,
+        addCardContent: ""
       });
     }
   };
@@ -39,39 +45,12 @@ class CardList extends React.Component {
   };
 
   onAddCardConfirm = () => {
-    const token = window.sessionStorage.getItem("token");
-    const newCardPos = this.state.cards.length;
-    if (token) {
-      fetch(`http://localhost:3000/createcard`, {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token
-        },
-        body: JSON.stringify({
-          cardContent: this.state.addCardContent,
-          listId: this.props.cardList.listId,
-          cardPosition: newCardPos
-        })
-      })
-        .then(response => response.json())
-        .then(card => {
-          this.setState({
-            addCardContent: "",
-            addCardToggle: false,
-            cards: [
-              ...this.state.cards,
-              {
-                cardContent: card.card_content,
-                cardId: card.card_id,
-                created: card.created,
-                cardPosition: newCardPos,
-                listId: card.list_id
-              }
-            ]
-          });
-        });
-    }
+    const newCard = {
+      cardContent: this.state.addCardContent,
+      listId: this.state.listId,
+      cardPosition: this.state.cards.length
+    };
+    this.props.onAddCard(newCard);
   };
 
   onDeleteCard = cardId => {

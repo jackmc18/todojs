@@ -43,6 +43,10 @@ class Board extends React.Component {
     }
   };
 
+  onAddListNameChange = event => {
+    this.setState({ addListName: event.target.value });
+  };
+
   onAddListToggle = () => {
     this.setState({ addListToggle: true });
   };
@@ -102,8 +106,45 @@ class Board extends React.Component {
     }
   };
 
-  onAddListNameChange = event => {
-    this.setState({ addListName: event.target.value });
+  onAddCard = newCard => {
+    const token = window.sessionStorage.getItem("token");
+    if (token) {
+      fetch(`http://localhost:3000/createcard`, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        body: JSON.stringify({
+          cardContent: newCard.cardContent,
+          listId: newCard.listId,
+          cardPosition: newCard.cardPosition
+        })
+      })
+        .then(response => response.json())
+        .then(card => {
+          console.log("cardLists:", this.state.cardLists);
+          console.log("card:", card);
+          const newCardLists = this.state.cardLists.map(list => {
+            if (list.listId === card.list_id) {
+              list.cards = [
+                ...list.cards,
+                {
+                  cardId: card.card_id,
+                  listId: card.list_id,
+                  cardContent: card.card_content,
+                  cardPosition: card.card_position,
+                  created: card.created
+                }
+              ];
+              console.log("list.card:", list.cards);
+            }
+            return list;
+          });
+          this.setState({ cardLists: newCardLists });
+          console.log("newCardLists:", newCardLists);
+        });
+    }
   };
 
   render() {
@@ -111,7 +152,11 @@ class Board extends React.Component {
     const cardLists = this.state.cardLists.map((cardList, index) => {
       return (
         <li className="card-list" key={index}>
-          <CardList cardList={cardList} onDeleteList={this.onDeleteList} />
+          <CardList
+            cardList={cardList}
+            onDeleteList={this.onDeleteList}
+            onAddCard={this.onAddCard}
+          />
         </li>
       );
     });
