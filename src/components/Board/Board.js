@@ -143,6 +143,38 @@ class Board extends React.Component {
     }
   };
 
+  onDeleteCard = cardId => {
+    const token = window.sessionStorage.getItem("token");
+    if (token) {
+      fetch("http://localhost:3000/deletecard/", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        body: JSON.stringify({
+          cardId: cardId
+        })
+      })
+        .then(response => response.json())
+        .then(card => {
+          if (card.card_id === cardId) {
+            const newCardLists = this.state.cardLists.map(list => {
+              if (list.listId === card.list_id) {
+                list.cards = list.cards.filter(fCard => {
+                  if (fCard.cardId === card.card_id) {
+                  }
+                  return fCard.cardId !== card.card_id;
+                });
+              }
+              return list;
+            });
+            this.setState({ cardLists: newCardLists });
+          }
+        });
+    }
+  };
+
   render() {
     const { board } = this.state;
     const cardLists = this.state.cardLists.map((cardList, index) => {
@@ -152,6 +184,7 @@ class Board extends React.Component {
             cardList={cardList}
             onDeleteList={this.onDeleteList}
             onAddCard={this.onAddCard}
+            onDeleteCard={this.onDeleteCard}
           />
         </li>
       );

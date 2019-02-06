@@ -53,30 +53,6 @@ class CardList extends React.Component {
     this.props.onAddCard(newCard);
   };
 
-  onDeleteCard = cardId => {
-    const token = window.sessionStorage.getItem("token");
-    if (token) {
-      fetch("http://localhost:3000/deletecard/", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token
-        },
-        body: JSON.stringify({
-          cardId: cardId
-        })
-      }).then(res => {
-        if (res.status === 200) {
-          this.setState({
-            cards: this.state.cards.filter(card => {
-              return card.cardId !== cardId;
-            })
-          });
-        }
-      });
-    }
-  };
-
   onAddCardNameChange = event => {
     this.setState({ addCardContent: event.target.value });
   };
@@ -87,7 +63,7 @@ class CardList extends React.Component {
     const cardsMap = cards.map((card, index) => {
       return (
         <li key={index}>
-          <Card card={card} onDeleteCard={this.onDeleteCard} />
+          <Card card={card} onDeleteCard={this.props.onDeleteCard} />
         </li>
       );
     });
