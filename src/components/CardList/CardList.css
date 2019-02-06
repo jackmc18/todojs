@@ -51,3 +51,13 @@ input.add-card {
   text-decoration: none;
   border-radius: 2px;
 }
+
+.edit-card-list {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  margin: 0;
+  padding: 0;
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "../Card/Card";
+import DeleteIcon from "../Icons/DeleteIcon";
 import "./CardList.css";
 
 const initialState = {
@@ -69,6 +70,21 @@ class CardList extends React.Component {
     });
   };
 
+  onDeleteCardList = () => {
+    const token = window.sessionStorage.getItem("token");
+    if (token) {
+      fetch("http://localhost:3000/deletelist/", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        }
+      })
+        .then(response => response.json())
+        .then(console.log);
+    }
+  };
+
   onAddCardNameChange = event => {
     this.setState({ addCardContent: event.target.value });
   };
@@ -86,7 +102,15 @@ class CardList extends React.Component {
 
     return (
       <div className="list">
-        <h4>{listName}</h4>
+        <div className="list-header" style={{ position: "relative" }}>
+          <h4>{listName}</h4>
+          <div
+            onClick={() => this.onDeleteCardList()}
+            className="edit-card-list"
+          >
+            <DeleteIcon />
+          </div>
+        </div>
         <ul>{cardsMap}</ul>
         {this.state.addCardToggle ? (
           <div className="add-card">
