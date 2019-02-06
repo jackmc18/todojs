@@ -74,12 +74,14 @@ class CardList extends React.Component {
         body: JSON.stringify({
           cardId: cardId
         })
-      }).then(() => {
-        this.setState({
-          cards: this.state.cards.filter(card => {
-            return card.cardId !== cardId;
-          })
-        });
+      }).then(res => {
+        if (res.status === 200) {
+          this.setState({
+            cards: this.state.cards.filter(card => {
+              return card.cardId !== cardId;
+            })
+          });
+        }
       });
     }
   };
