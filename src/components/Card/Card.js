@@ -50,24 +50,6 @@ class Card extends React.Component {
     this.setState({ isHovering: false });
   };
 
-  // handleDeleteCard = () => {
-  //   const token = window.sessionStorage.getItem("token");
-  //   if (token) {
-  //     fetch("http://localhost:3000/deletecard/", {
-  //       method: "post",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: token
-  //       },
-  //       body: JSON.stringify({
-  //         cardId: this.state.cardId
-  //       })
-  //     }).then(() => {
-  //       this.props.onDeleteCard(this.state.cardId);
-  //     });
-  //   }
-  // };
-
   render() {
     return (
       <div

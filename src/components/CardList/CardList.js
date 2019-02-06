@@ -86,21 +86,6 @@ class CardList extends React.Component {
     }
   };
 
-  onDeleteCardList = () => {
-    const token = window.sessionStorage.getItem("token");
-    if (token) {
-      fetch("http://localhost:3000/deletelist/", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token
-        }
-      })
-        .then(response => response.json())
-        .then(console.log);
-    }
-  };
-
   onAddCardNameChange = event => {
     this.setState({ addCardContent: event.target.value });
   };
@@ -121,7 +106,7 @@ class CardList extends React.Component {
         <div className="list-header" style={{ position: "relative" }}>
           <h4>{listName}</h4>
           <div
-            onClick={() => this.onDeleteCardList()}
+            onClick={() => this.props.onDeleteList()}
             className="edit-card-list"
           >
             <DeleteIcon />

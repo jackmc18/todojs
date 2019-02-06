@@ -78,6 +78,21 @@ class Board extends React.Component {
     }
   };
 
+  onDeleteList = () => {
+    const token = window.sessionStorage.getItem("token");
+    if (token) {
+      fetch("http://localhost:3000/deletelist/", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        }
+      })
+        .then(response => response.json())
+        .then(console.log);
+    }
+  };
+
   onAddListNameChange = event => {
     this.setState({ addListName: event.target.value });
   };
@@ -87,7 +102,7 @@ class Board extends React.Component {
     const cardLists = this.state.cardLists.map((cardList, index) => {
       return (
         <li className="card-list" key={index}>
-          <CardList cardList={cardList} />
+          <CardList cardList={cardList} onDeleteList={this.onDeleteList} />
         </li>
       );
     });
