@@ -63,11 +63,25 @@ class CardList extends React.Component {
   };
 
   onDeleteCard = cardId => {
-    this.setState({
-      cards: this.state.cards.filter(card => {
-        return card.cardId !== cardId;
-      })
-    });
+    const token = window.sessionStorage.getItem("token");
+    if (token) {
+      fetch("http://localhost:3000/deletecard/", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        body: JSON.stringify({
+          cardId: cardId
+        })
+      }).then(() => {
+        this.setState({
+          cards: this.state.cards.filter(card => {
+            return card.cardId !== cardId;
+          })
+        });
+      });
+    }
   };
 
   onDeleteCardList = () => {

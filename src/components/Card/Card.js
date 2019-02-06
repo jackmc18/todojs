@@ -50,23 +50,23 @@ class Card extends React.Component {
     this.setState({ isHovering: false });
   };
 
-  handleDeleteCard = () => {
-    const token = window.sessionStorage.getItem("token");
-    if (token) {
-      fetch("http://localhost:3000/deletecard/", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token
-        },
-        body: JSON.stringify({
-          cardId: this.state.cardId
-        })
-      }).then(() => {
-        this.props.onDeleteCard(this.state.cardId);
-      });
-    }
-  };
+  // handleDeleteCard = () => {
+  //   const token = window.sessionStorage.getItem("token");
+  //   if (token) {
+  //     fetch("http://localhost:3000/deletecard/", {
+  //       method: "post",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: token
+  //       },
+  //       body: JSON.stringify({
+  //         cardId: this.state.cardId
+  //       })
+  //     }).then(() => {
+  //       this.props.onDeleteCard(this.state.cardId);
+  //     });
+  //   }
+  // };
 
   render() {
     return (
@@ -78,7 +78,10 @@ class Card extends React.Component {
         {this.state.isHovering ? (
           <div style={{ position: "relative" }}>
             <div className="content">{this.state.content}</div>
-            <div onClick={() => this.handleDeleteCard()} className="edit-card">
+            <div
+              onClick={() => this.props.onDeleteCard(this.state.cardId)}
+              className="edit-card"
+            >
               <DeleteIcon />
             </div>
           </div>
