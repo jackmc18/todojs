@@ -123,8 +123,6 @@ class Board extends React.Component {
       })
         .then(response => response.json())
         .then(card => {
-          console.log("cardLists:", this.state.cardLists);
-          console.log("card:", card);
           const newCardLists = this.state.cardLists.map(list => {
             if (list.listId === card.list_id) {
               list.cards = [
@@ -137,12 +135,10 @@ class Board extends React.Component {
                   created: card.created
                 }
               ];
-              console.log("list.card:", list.cards);
             }
             return list;
           });
           this.setState({ cardLists: newCardLists });
-          console.log("newCardLists:", newCardLists);
         });
     }
   };
