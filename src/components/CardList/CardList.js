@@ -15,12 +15,24 @@ class CardList extends React.Component {
   state = initialState;
 
   componentDidMount() {
-    this.setState({
-      cards: this.props.cardList.cards,
-      listName: this.props.cardList.listName,
-      listId: this.props.cardList.listId
-    });
+    this.handleUpdateListState();
   }
+
+  componentDidUpdate() {
+    this.handleUpdateListState();
+  }
+
+  handleUpdateListState = () => {
+    const { cardList } = this.props;
+    const { listId, listName } = this.state;
+    if (cardList.listId !== listId || cardList.listName !== listName) {
+      this.setState({
+        cards: cardList.cards,
+        listName: cardList.listName,
+        listId: cardList.listId
+      });
+    }
+  };
 
   onAddCardToggle = () => {
     this.setState({ addCardToggle: true });
@@ -91,7 +103,7 @@ class CardList extends React.Component {
   };
 
   render() {
-    const { listName, cards } = this.state;
+    const { listName, listId, cards } = this.state;
 
     const cardsMap = cards.map((card, index) => {
       return (
@@ -106,7 +118,7 @@ class CardList extends React.Component {
         <div className="list-header" style={{ position: "relative" }}>
           <h4>{listName}</h4>
           <div
-            onClick={() => this.props.onDeleteList()}
+            onClick={() => this.props.onDeleteList(listId)}
             className="edit-card-list"
           >
             <DeleteIcon />

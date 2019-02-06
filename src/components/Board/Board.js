@@ -78,7 +78,7 @@ class Board extends React.Component {
     }
   };
 
-  onDeleteList = () => {
+  onDeleteList = listId => {
     const token = window.sessionStorage.getItem("token");
     if (token) {
       fetch("http://localhost:3000/deletelist/", {
@@ -86,10 +86,19 @@ class Board extends React.Component {
         headers: {
           "Content-Type": "application/json",
           Authorization: token
+        },
+        body: JSON.stringify({
+          listId: listId
+        })
+      }).then(res => {
+        if (res.status === 200) {
+          this.setState({
+            cardLists: this.state.cardLists.filter(list => {
+              return list.listId !== listId;
+            })
+          });
         }
-      })
-        .then(response => response.json())
-        .then(console.log);
+      });
     }
   };
 
