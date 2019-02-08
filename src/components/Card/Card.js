@@ -1,5 +1,6 @@
 import React from "react";
 import DeleteIcon from "../Icons/DeleteIcon";
+import EditIcon from "../Icons/EditIcon";
 import "./Card.css";
 
 const initialState = {
@@ -62,15 +63,21 @@ class Card extends React.Component {
         {this.state.isHovering ? (
           <div style={{ position: "relative" }}>
             <div className="content">{this.state.content}</div>
-            <div
-              onClick={() => this.props.onDeleteCard(this.state.cardId)}
-              className="edit-card"
-            >
-              <DeleteIcon />
-            </div>
+            <ul className="edit-card pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+              <EditIcon />
+              <ul className="pure-menu-children">
+                <li className="pure-menu-item">
+                  <div
+                    onClick={() => this.props.onDeleteCard(this.state.cardId)}
+                  >
+                    <DeleteIcon />
+                  </div>
+                </li>
+              </ul>
+            </ul>
           </div>
         ) : (
-          <div className="conent">{this.state.content}</div>
+          <div className="content">{this.state.content}</div>
         )}
       </div>
     );
