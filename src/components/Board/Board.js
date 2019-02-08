@@ -161,8 +161,12 @@ class Board extends React.Component {
           if (card.card_id === cardId) {
             const newCardLists = this.state.cardLists.map(list => {
               if (list.listId === card.list_id) {
+                let decFlag = false;
                 list.cards = list.cards.filter(fCard => {
                   if (fCard.cardId === card.card_id) {
+                    decFlag = true;
+                  } else if (decFlag) {
+                    fCard.cardPosition--;
                   }
                   return fCard.cardId !== card.card_id;
                 });
