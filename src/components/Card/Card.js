@@ -6,6 +6,7 @@ const initialState = {
   cardId: null,
   content: "",
   position: null,
+  listId: null,
   isHovering: false
 };
 
@@ -37,7 +38,8 @@ class Card extends React.Component {
       this.setState({
         cardId: card.cardId,
         content: card.cardContent,
-        position: card.cardPosition
+        position: card.cardPosition,
+        listId: card.listId
       });
     }
   };
