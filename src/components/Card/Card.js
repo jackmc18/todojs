@@ -1,6 +1,7 @@
 import React from "react";
 import DeleteIcon from "../Icons/DeleteIcon";
 import EditIcon from "../Icons/EditIcon";
+import Dropdown from "../Dropdown/Dropdown";
 import "./Card.css";
 
 const initialState = {
@@ -53,6 +54,10 @@ class Card extends React.Component {
     this.setState({ isHovering: false });
   };
 
+  onDeleteCard = () => {
+    this.props.onDeleteCard(this.state.cardId);
+  };
+
   render() {
     return (
       <div
@@ -63,19 +68,23 @@ class Card extends React.Component {
         <div className="content" style={{ position: "relative" }}>
           {this.state.content}
           {this.state.isHovering ? (
-            <ul className="edit-card pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-              <EditIcon />
-              <ul className="pure-menu-children">
-                <li className="pure-menu-item">
-                  <div
-                    onClick={() => this.props.onDeleteCard(this.state.cardId)}
-                  >
-                    <DeleteIcon />
-                  </div>
-                </li>
-              </ul>
-            </ul>
-          ) : null
+            <Dropdown
+              menuTitle={<EditIcon />}
+              menuChildren={[<DeleteIcon onDeleteItem={this.onDeleteCard} />]}
+            />
+          ) : // <ul className="edit-card pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+          //   <EditIcon />
+          //   <ul className="pure-menu-children">
+          //     <li className="pure-menu-item">
+          //       <div
+          //         onClick={() => this.props.onDeleteCard(this.state.cardId)}
+          //       >
+          //         <DeleteIcon />
+          //       </div>
+          //     </li>
+          //   </ul>
+          // </ul>
+          null
           //<div className="content">{this.state.content}</div>
           }
         </div>
