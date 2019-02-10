@@ -60,9 +60,9 @@ class Card extends React.Component {
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
-        {this.state.isHovering ? (
-          <div style={{ position: "relative" }}>
-            <div className="content">{this.state.content}</div>
+        <div className="content" style={{ position: "relative" }}>
+          {this.state.content}
+          {this.state.isHovering ? (
             <ul className="edit-card pure-menu-item pure-menu-has-children pure-menu-allow-hover">
               <EditIcon />
               <ul className="pure-menu-children">
@@ -75,10 +75,10 @@ class Card extends React.Component {
                 </li>
               </ul>
             </ul>
-          </div>
-        ) : (
-          <div className="content">{this.state.content}</div>
-        )}
+          ) : null
+          //<div className="content">{this.state.content}</div>
+          }
+        </div>
       </div>
     );
   }
