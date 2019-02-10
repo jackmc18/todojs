@@ -72,21 +72,7 @@ class Card extends React.Component {
               menuTitle={<EditIcon />}
               menuChildren={[<DeleteIcon onDeleteItem={this.onDeleteCard} />]}
             />
-          ) : // <ul className="edit-card pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-          //   <EditIcon />
-          //   <ul className="pure-menu-children">
-          //     <li className="pure-menu-item">
-          //       <div
-          //         onClick={() => this.props.onDeleteCard(this.state.cardId)}
-          //       >
-          //         <DeleteIcon />
-          //       </div>
-          //     </li>
-          //   </ul>
-          // </ul>
-          null
-          //<div className="content">{this.state.content}</div>
-          }
+          ) : null}
         </div>
       </div>
     );
