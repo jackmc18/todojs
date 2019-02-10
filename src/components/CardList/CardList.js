@@ -2,6 +2,7 @@ import React from "react";
 import Card from "../Card/Card";
 import DeleteIcon from "../Icons/DeleteIcon";
 import HorizTripDotIcon from "../Icons/HorizTripDotIcon";
+import Dropdown from "../Dropdown/Dropdown";
 import "./CardList.css";
 
 const initialState = {
@@ -58,6 +59,10 @@ class CardList extends React.Component {
     this.setState({ addCardContent: event.target.value });
   };
 
+  onDeleteList = () => {
+    this.props.onDeleteList(this.state.listId);
+  };
+
   render() {
     const { listName, listId, cards } = this.state;
 
@@ -73,16 +78,10 @@ class CardList extends React.Component {
       <div className="list">
         <div className="list-header" style={{ position: "relative" }}>
           <h4>{listName}</h4>
-          <ul className="edit-card pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-            <HorizTripDotIcon />
-            <ul className="pure-menu-children">
-              <li className="pure-menu-item">
-                <div onClick={() => this.props.onDeleteList(listId)}>
-                  <DeleteIcon />
-                </div>
-              </li>
-            </ul>
-          </ul>
+          <Dropdown
+            menuTitle={<HorizTripDotIcon />}
+            menuChildren={[<DeleteIcon onDeleteItem={this.onDeleteList} />]}
+          />
         </div>
         <ul>{cardsMap}</ul>
         {this.state.addCardToggle ? (
