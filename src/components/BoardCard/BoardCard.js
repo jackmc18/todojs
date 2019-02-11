@@ -5,7 +5,7 @@ import "./BoardCard.css";
 const BoardCard = ({ board }) => {
   return (
     <div>
-      <Link to={`/board/${board.board_id}`} className="board-card pure-button">
+      <Link to={`/board/${board.board_id}`} className="board-card">
         {board.board_name}
       </Link>
     </div>

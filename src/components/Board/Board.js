@@ -211,17 +211,14 @@ class Board extends React.Component {
                     />
                     <button
                       onClick={this.onAddListConfirm}
-                      className="pure-button pure-button-primary add-list"
+                      className="add-list"
                     >
                       Add List
                     </button>
                   </div>
                 ) : (
                   <div className="add-list">
-                    <button
-                      onClick={this.onAddListToggle}
-                      className="pure-button pure-button-primary add-list"
-                    >
+                    <button onClick={this.onAddListToggle} className="add-list">
                       Add List
                     </button>
                   </div>

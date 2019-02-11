@@ -63,7 +63,7 @@ class SignIn extends React.Component {
       <article className="center">
         <main>
           <div>
-            <form className="pure-form pure-form-stacked">
+            <form className="">
               <fieldset>
                 <legend>Sign In</legend>
                 <label htmlFor="email">Email</label>
@@ -87,13 +87,13 @@ class SignIn extends React.Component {
                 <input
                   type="button"
                   value="Sign in"
-                  className="pure-button pure-button-primary"
+                  className=""
                   onClick={this.onSubmitSignIn}
                 />
               </fieldset>
             </form>
             <div>
-              <Link to="/register" className="pure-button pure-button-primary">
+              <Link to="/register" className="">
                 Register
               </Link>
             </div>

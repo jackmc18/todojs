@@ -5,18 +5,18 @@ import "./Navigation.css";
 const Navigation = ({ isSignedIn, signOut }) => {
   if (isSignedIn)
     return (
-      <div className="pure-menu pure-menu-horizontal">
-        <Link to="/" className="pure-menu-heading pure-menu-link">
+      <div className="">
+        <Link to="/" className="">
           ORGANIZER
         </Link>
-        <ul className="pure-menu-list right">
-          <li className="pure-menu-item">
-            <Link to="/boardList" className="pure-menu-link">
+        <ul className="">
+          <li className="">
+            <Link to="/boardList" className="">
               Boards
             </Link>
           </li>
-          <li className="pure-menu-item">
-            <Link to="/signin" onClick={signOut} className="pure-menu-link">
+          <li className="">
+            <Link to="/signin" onClick={signOut} className="">
               Sign Out
             </Link>
           </li>
@@ -25,18 +25,18 @@ const Navigation = ({ isSignedIn, signOut }) => {
     );
 
   return (
-    <div className="pure-menu pure-menu-horizontal">
-      <Link to="/" className="pure-menu-heading pure-menu-link">
+    <div className="">
+      <Link to="/" className="">
         ORGANIZER
       </Link>
-      <ul className="pure-menu-list right">
-        <li className="pure-menu-item">
-          <Link to="/register" className="pure-menu-link">
+      <ul className="">
+        <li className="">
+          <Link to="/register" className="">
             Register
           </Link>
         </li>
-        <li className="pure-menu-item">
-          <Link to="/signin" className="pure-menu-link">
+        <li className="">
+          <Link to="/signin" className="">
             Sign In
           </Link>
         </li>

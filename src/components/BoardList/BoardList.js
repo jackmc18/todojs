@@ -101,18 +101,14 @@ class BoardList extends React.Component {
             />
             <button
               onClick={this.onCreateBoardConfirm}
-              //to={{ pathname: `/board/${this.state.createBoardName}` }}
-              className="pure-button pure-button-primary create-board"
+              className="create-board"
             >
               CreateBoard
             </button>
           </div>
         ) : (
           <div className="create-board">
-            <button
-              onClick={this.onCreateBoardToggle}
-              className="pure-button pure-button-primary create-board"
-            >
+            <button onClick={this.onCreateBoardToggle} className="create-board">
               CreateBoard
             </button>
           </div>

@@ -91,19 +91,13 @@ class CardList extends React.Component {
               placeholder="Card Content"
               onChange={this.onAddCardNameChange}
             />
-            <button
-              onClick={this.onAddCardConfirm}
-              className="pure-button pure-button-primary"
-            >
+            <button onClick={this.onAddCardConfirm} className="">
               Add Card
             </button>
           </div>
         ) : (
           <div className="add-card">
-            <button
-              onClick={this.onAddCardToggle}
-              className="pure-button pure-button-primary"
-            >
+            <button onClick={this.onAddCardToggle} className="">
               Add Card
             </button>
           </div>

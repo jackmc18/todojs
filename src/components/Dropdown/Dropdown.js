@@ -14,8 +14,8 @@ class Dropdown extends React.Component {
     this.setState({
       menuChildren: this.props.menuChildren.map((child, i) => {
         return (
-          <ul key={i} className="pure-menu-children">
-            <li className="pure-menu-item">
+          <ul key={i} className="">
+            <li className="">
               <div>{child}</div>
             </li>
           </ul>
@@ -31,7 +31,7 @@ class Dropdown extends React.Component {
   render() {
     return (
       <div>
-        <ul className="edit-card pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+        <ul className="edit-card">
           <div onClick={this.onMenuOpen}>{this.props.menuTitle}</div>
           {this.state.menuOpen ? this.state.menuChildren : null}
         </ul>

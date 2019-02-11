@@ -54,7 +54,7 @@ class Register extends React.Component {
       <article className="center">
         <main>
           <div>
-            <form className="pure-form pure-form-stacked">
+            <form className="">
               <fieldset>
                 <legend>Register</legend>
                 <label htmlFor="name">Name</label>
@@ -87,7 +87,7 @@ class Register extends React.Component {
                 <input
                   type="button"
                   value="Register"
-                  className="pure-button pure-button-primary"
+                  className=""
                   onClick={this.onSubmitRegister}
                 />
               </fieldset>
