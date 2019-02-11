@@ -64,7 +64,7 @@ class CardList extends React.Component {
   };
 
   render() {
-    const { listName, listId, cards } = this.state;
+    const { listName, cards } = this.state;
 
     const cardsMap = cards.map((card, index) => {
       return (
