@@ -7,6 +7,10 @@ class Dropdown extends React.Component {
   };
 
   componentDidMount() {
+    this.loadChildren();
+  }
+
+  loadChildren = () => {
     this.setState({
       menuChildren: this.props.menuChildren.map((child, i) => {
         return (
@@ -18,7 +22,7 @@ class Dropdown extends React.Component {
         );
       })
     });
-  }
+  };
 
   render() {
     return (
