@@ -24,12 +24,16 @@ class Dropdown extends React.Component {
     });
   };
 
+  onMenuOpen = () => {
+    this.setState({ menuOpen: true });
+  };
+
   render() {
     return (
       <div>
         <ul className="edit-card pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-          {this.props.menuTitle}
-          {this.state.menuChildren}
+          <div onClick={this.onMenuOpen}>{this.props.menuTitle}</div>
+          {this.state.menuOpen ? this.state.menuChildren : null}
         </ul>
       </div>
     );
