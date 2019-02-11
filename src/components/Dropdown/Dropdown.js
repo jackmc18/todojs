@@ -1,24 +1,35 @@
 import React from "react";
 
-const Dropdown = props => {
-  const menuChildren = props.menuChildren.map((child, i) => {
-    return (
-      <ul key={i} className="pure-menu-children">
-        <li className="pure-menu-item">
-          <div>{child}</div>
-        </li>
-      </ul>
-    );
-  });
+class Dropdown extends React.Component {
+  state = {
+    menuOpen: false,
+    menuChildren: []
+  };
 
-  return (
-    <div>
-      <ul className="edit-card pure-menu-item pure-menu-has-children pure-menu-allow-hover">
-        {props.menuTitle}
-        {menuChildren}
-      </ul>
-    </div>
-  );
-};
+  componentDidMount() {
+    this.setState({
+      menuChildren: this.props.menuChildren.map((child, i) => {
+        return (
+          <ul key={i} className="pure-menu-children">
+            <li className="pure-menu-item">
+              <div>{child}</div>
+            </li>
+          </ul>
+        );
+      })
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <ul className="edit-card pure-menu-item pure-menu-has-children pure-menu-allow-hover">
+          {this.props.menuTitle}
+          {this.state.menuChildren}
+        </ul>
+      </div>
+    );
+  }
+}
 
 export default Dropdown;
