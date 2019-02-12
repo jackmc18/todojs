@@ -61,3 +61,7 @@ input.add-card {
   margin: 0;
   padding: 0;
 }
+
+.card-class-name {
+  background-color: red;
+}

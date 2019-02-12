@@ -69,7 +69,11 @@ class CardList extends React.Component {
     const cardsMap = cards.map((card, index) => {
       return (
         <li key={index}>
-          <Card card={card} onDeleteCard={this.props.onDeleteCard} />
+          <Card
+            className="card-class-name"
+            card={card}
+            onDeleteCard={this.props.onDeleteCard}
+          />
         </li>
       );
     });
