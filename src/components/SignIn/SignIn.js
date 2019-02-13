@@ -101,7 +101,6 @@ class SignIn extends React.Component {
     const { classes } = this.props;
 
     if (isSignedIn) {
-      console.log("isSignedIn");
       return <Redirect to="/boardList" />;
     }
 
