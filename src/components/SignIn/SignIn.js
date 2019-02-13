@@ -160,46 +160,6 @@ class SignIn extends React.Component {
             </form>
           </Paper>
         </main>
-        {/* <article className="center">
-          <main>
-            <div>
-              <form className="">
-                <fieldset>
-                  <legend>Sign In</legend>
-                  <label htmlFor="email">Email</label>
-                  <input
-                    type="email"
-                    name="email-address"
-                    id="email-address"
-                    placeholder="Email"
-                    onChange={this.onEmailChange}
-                  />
-
-                  <label htmlFor="password">Password</label>
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="Password"
-                    onChange={this.onPasswordChange}
-                  />
-
-                  <input
-                    type="button"
-                    value="Sign in"
-                    className=""
-                    onClick={this.onSubmitSignIn}
-                  />
-                </fieldset>
-              </form>
-              <div>
-                <Link to="/register" className="">
-                  Register
-                </Link>
-              </div>
-            </div>
-          </main>
-        </article> */}
       </div>
     );
   }
