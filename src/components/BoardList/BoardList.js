@@ -31,7 +31,7 @@ class BoardList extends React.Component {
       })
         .then(resp => resp.json())
         .then(data => {
-          this.setState({ boards: data });
+          if (data.length) this.setState({ boards: data });
         });
     } else {
       this.setState({ redirectToSignin: true });
@@ -88,9 +88,11 @@ class BoardList extends React.Component {
       <div className="board-list">
         <h3>Board List</h3>
         <div>
-          {boards.map(board => (
-            <BoardCard key={board.board_id} board={board} />
-          ))}
+          {boards
+            ? boards.map(board => (
+                <BoardCard key={board.board_id} board={board} />
+              ))
+            : null}
         </div>
         {this.state.createBoardFlag ? (
           <div className="create-board">
