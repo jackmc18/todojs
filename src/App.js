@@ -14,7 +14,7 @@ import withRoot from "./withRoot";
 import "./App.css";
 
 const initialState = {
-  isSignedIn: false,
+  isSignedIn: null,
   user: {
     id: "",
     name: "",
@@ -23,11 +23,7 @@ const initialState = {
   }
 };
 
-const styles = theme => ({
-  root: {
-    paddingTop: theme.spacing.unit * 20
-  }
-});
+const styles = theme => ({});
 
 class App extends Component {
   constructor() {
@@ -84,6 +80,7 @@ class App extends Component {
   };
 
   onSignOut = () => {
+    //event.preventDefault();
     this.setState({
       isSignedIn: false,
       user: {
@@ -101,26 +98,30 @@ class App extends Component {
 
     return (
       <div className={classes.root}>
-        <BrowserRouter>
-          <div className="app-container">
-            <Navigation isSignedIn={isSignedIn} signOut={this.onSignOut} />
-            <Route path="/" exact component={Home} />
-            <Route
-              path="/signin"
-              exact
-              render={props => <SignIn {...props} loadUser={this.loadUser} />}
-            />
-            <Route
-              path="/register"
-              render={props => <Register {...props} loadUser={this.loadUser} />}
-            />
-            <Route
-              path="/boardList"
-              render={props => <BoardList {...props} user={user} />}
-            />
-            <Route name="board" path="/board/:id" component={Board} />
-          </div>
-        </BrowserRouter>
+        {isSignedIn !== null ? (
+          <BrowserRouter>
+            <div className="app-container">
+              <Navigation isSignedIn={isSignedIn} signOut={this.onSignOut} />
+              <Route path="/" exact component={Home} />
+              <Route
+                path="/signin"
+                exact
+                render={props => <SignIn {...props} loadUser={this.loadUser} />}
+              />
+              <Route
+                path="/register"
+                render={props => (
+                  <Register {...props} loadUser={this.loadUser} />
+                )}
+              />
+              <Route
+                path="/boardList"
+                render={props => <BoardList {...props} user={user} />}
+              />
+              <Route name="board" path="/board/:id" component={Board} />
+            </div>
+          </BrowserRouter>
+        ) : null}
       </div>
     );
   }
