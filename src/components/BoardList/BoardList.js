@@ -1,7 +1,6 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import BoardCard from "../BoardCard/BoardCard";
-import "./BoardList.css";
 
 const initialState = {
   boards: [],
