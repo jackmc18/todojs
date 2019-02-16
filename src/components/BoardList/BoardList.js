@@ -1,6 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import BoardCard from "../BoardCard/BoardCard";
+import Button from "@material-ui/core/Button";
 
 const initialState = {
   boards: [],
@@ -109,9 +110,13 @@ class BoardList extends React.Component {
           </div>
         ) : (
           <div className="create-board">
-            <button onClick={this.onCreateBoardToggle} className="create-board">
-              CreateBoard
-            </button>
+            <Button
+              variant="outlined"
+              onClick={this.onCreateBoardToggle}
+              className="create-board"
+            >
+              Create Board
+            </Button>
           </div>
         )}
       </div>
