@@ -3,6 +3,8 @@ import { Redirect } from "react-router-dom";
 import BoardCard from "../BoardCard/BoardCard";
 import Button from "@material-ui/core/Button";
 
+import CreateBoardDialog from "../CreateBoardDialog/CreateBoardDialog";
+
 const initialState = {
   boards: [],
   createBoardFlag: false,
@@ -38,11 +40,15 @@ class BoardList extends React.Component {
     }
   };
 
-  onCreateBoardToggle = () => {
+  handleOpenCreateBoardDialog = () => {
     this.setState({ createBoardFlag: true });
   };
 
-  onCreateBoardConfirm = () => {
+  handleCloseCreateBoardDialog = () => {
+    this.setState({ createBoardFlag: false });
+  };
+
+  onCreateBoardConfirm = newBoardName => {
     this.setState({
       createBoardToggle: false
       // boards: [...this.state.boards, this.state.createBoardName]
@@ -56,7 +62,7 @@ class BoardList extends React.Component {
           Authorization: token
         },
         body: JSON.stringify({
-          boardName: this.state.createBoardName
+          boardName: newBoardName
         })
       })
         .then(resp => resp.json())
@@ -66,10 +72,6 @@ class BoardList extends React.Component {
     } else {
       this.setState({ redirectToSignin: true });
     }
-  };
-
-  onCreateBoardNameChange = event => {
-    this.setState({ createBoardName: event.target.value });
   };
 
   render() {
@@ -94,31 +96,18 @@ class BoardList extends React.Component {
               ))
             : null}
         </div>
-        {this.state.createBoardFlag ? (
-          <div className="create-board">
-            <input
-              className="create-board"
-              placeholder="Board Name"
-              onChange={this.onCreateBoardNameChange}
-            />
-            <button
-              onClick={this.onCreateBoardConfirm}
-              className="create-board"
-            >
-              CreateBoard
-            </button>
-          </div>
-        ) : (
-          <div className="create-board">
-            <Button
-              variant="outlined"
-              onClick={this.onCreateBoardToggle}
-              className="create-board"
-            >
-              Create Board
-            </Button>
-          </div>
-        )}
+        <Button
+          variant="outlined"
+          onClick={this.handleOpenCreateBoardDialog}
+          className="create-board"
+        >
+          Create Board
+        </Button>
+        <CreateBoardDialog
+          open={this.state.createBoardFlag}
+          onClose={this.handleCloseCreateBoardDialog}
+          onCreateBoard={this.onCreateBoardConfirm}
+        />
       </div>
     );
   }
