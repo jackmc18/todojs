@@ -2,6 +2,7 @@ import React from "react";
 import { Redirect } from "react-router-dom";
 import BoardCard from "../BoardCard/BoardCard";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 import CreateBoardDialog from "../CreateBoardDialog/CreateBoardDialog";
 
@@ -88,7 +89,9 @@ class BoardList extends React.Component {
     }
     return (
       <div className="board-list">
-        <h3>Board List</h3>
+        <Typography component="h1" variant="h5">
+          Boards
+        </Typography>
         <div>
           {boards
             ? boards.map(board => (
