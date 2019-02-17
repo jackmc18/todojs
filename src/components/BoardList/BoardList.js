@@ -1,4 +1,5 @@
 import React from "react";
+import { withRouter } from "react-router";
 import { Redirect } from "react-router-dom";
 import BoardCard from "../BoardCard/BoardCard";
 import Button from "@material-ui/core/Button";
@@ -75,6 +76,10 @@ class BoardList extends React.Component {
     }
   };
 
+  onSelectBoard = board => {
+    this.props.history.push(`/board/${board.board_id}`);
+  };
+
   render() {
     const {
       redirectToSignin,
@@ -95,7 +100,11 @@ class BoardList extends React.Component {
         <div>
           {boards
             ? boards.map(board => (
-                <BoardCard key={board.board_id} board={board} />
+                <BoardCard
+                  key={board.board_id}
+                  board={board}
+                  onSelectBoard={this.onSelectBoard}
+                />
               ))
             : null}
         </div>
@@ -116,4 +125,4 @@ class BoardList extends React.Component {
   }
 }
 
-export default BoardList;
+export default withRouter(BoardList);
