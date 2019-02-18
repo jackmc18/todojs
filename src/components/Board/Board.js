@@ -182,7 +182,7 @@ class Board extends React.Component {
     const { board } = this.state;
     const cardLists = this.state.cardLists.map((cardList, index) => {
       return (
-        <li className="card-list" key={index}>
+        <li key={index}>
           <CardList
             cardList={cardList}
             onDeleteList={this.onDeleteList}
@@ -194,32 +194,24 @@ class Board extends React.Component {
     });
 
     return (
-      <div className="board-wrapper">
-        <div className="scrolling-wrapper">
+      <div>
+        <div>
           <h3>{board.boardName}</h3>
-          <div className="list-wrapper">
-            <ul className="card-list">
+          <div>
+            <ul>
               {cardLists}
               <li>
                 {this.state.addListToggle ? (
-                  <div className="add-list">
+                  <div>
                     <input
-                      className="add-list"
                       placeholder="List Name"
                       onChange={this.onAddListNameChange}
                     />
-                    <button
-                      onClick={this.onAddListConfirm}
-                      className="add-list"
-                    >
-                      Add List
-                    </button>
+                    <button onClick={this.onAddListConfirm}>Add List</button>
                   </div>
                 ) : (
-                  <div className="add-list">
-                    <button onClick={this.onAddListToggle} className="add-list">
-                      Add List
-                    </button>
+                  <div>
+                    <button onClick={this.onAddListToggle}>Add List</button>
                   </div>
                 )}
               </li>
