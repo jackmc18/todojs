@@ -1,6 +1,5 @@
 import React from "react";
 import CardList from "../CardList/CardList";
-import "./Board.css";
 
 const initialState = {
   board: {
