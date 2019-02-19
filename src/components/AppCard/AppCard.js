@@ -11,7 +11,7 @@ const initialState = {
   isHovering: false
 };
 
-class Card extends React.Component {
+class AppCard extends React.Component {
   state = initialState;
 
   componentDidMount() {
@@ -77,4 +77,4 @@ class Card extends React.Component {
   }
 }
 
-export default Card;
+export default AppCard;

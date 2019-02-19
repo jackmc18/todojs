@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../Card/Card";
+import AppCard from "../AppCard/AppCard";
 import DeleteIcon from "../Icons/DeleteIcon";
 import HorizTripDotIcon from "../Icons/HorizTripDotIcon";
 import Dropdown from "../Dropdown/Dropdown";
@@ -69,7 +69,7 @@ class CardList extends React.Component {
     const cardsMap = cards.map((card, index) => {
       return (
         <li key={index}>
-          <Card
+          <AppCard
             className="card-class-name"
             card={card}
             onDeleteCard={this.props.onDeleteCard}
