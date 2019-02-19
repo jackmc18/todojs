@@ -2,7 +2,6 @@ import React from "react";
 import DeleteIcon from "../Icons/DeleteIcon";
 import EditIcon from "../Icons/EditIcon";
 import Dropdown from "../Dropdown/Dropdown";
-import "./Card.css";
 
 const initialState = {
   cardId: null,
@@ -61,11 +60,10 @@ class Card extends React.Component {
   render() {
     return (
       <div
-        className="card"
         onMouseEnter={this.handleMouseEnter}
         onMouseLeave={this.handleMouseLeave}
       >
-        <div className="content" style={{ position: "relative" }}>
+        <div>
           {this.state.content}
           {this.state.isHovering ? (
             <Dropdown
