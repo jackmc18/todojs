@@ -1,7 +1,19 @@
 import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
 import DeleteIcon from "../Icons/DeleteIcon";
 import EditIcon from "../Icons/EditIcon";
 import Dropdown from "../Dropdown/Dropdown";
+
+import Card from "@material-ui/core/Card";
+
+const styles = {
+  card: {
+    minWidth: 200,
+    maxWidth: 275,
+    minHeight: 30
+  }
+};
 
 const initialState = {
   cardId: null,
@@ -58,23 +70,30 @@ class AppCard extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
-      <div
-        onMouseEnter={this.handleMouseEnter}
-        onMouseLeave={this.handleMouseLeave}
-      >
-        <div>
-          {this.state.content}
-          {this.state.isHovering ? (
-            <Dropdown
-              menuTitle={<EditIcon />}
-              menuChildren={[<DeleteIcon onDeleteItem={this.onDeleteCard} />]}
-            />
-          ) : null}
+      <Card className={classes.card}>
+        <div
+          onMouseEnter={this.handleMouseEnter}
+          onMouseLeave={this.handleMouseLeave}
+        >
+          <div>
+            {this.state.content}
+            {this.state.isHovering ? (
+              <Dropdown
+                menuTitle={<EditIcon />}
+                menuChildren={[<DeleteIcon onDeleteItem={this.onDeleteCard} />]}
+              />
+            ) : null}
+          </div>
         </div>
-      </div>
+      </Card>
     );
   }
 }
 
-export default AppCard;
+AppCard.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(AppCard);
