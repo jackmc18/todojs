@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import DeleteIcon from "@material-ui/icons/Delete";
+//import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-import Dropdown from "../Dropdown/Dropdown";
 
 import Card from "@material-ui/core/Card";
 
@@ -79,12 +78,7 @@ class AppCard extends React.Component {
         >
           <div>
             {this.state.content}
-            {this.state.isHovering ? (
-              <Dropdown
-                menuTitle={<EditIcon />}
-                menuChildren={[<DeleteIcon onDeleteItem={this.onDeleteCard} />]}
-              />
-            ) : null}
+            {this.state.isHovering ? <EditIcon /> : null}
           </div>
         </div>
       </Card>

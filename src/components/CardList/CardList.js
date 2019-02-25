@@ -1,8 +1,6 @@
 import React from "react";
 import AppCard from "../AppCard/AppCard";
-import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import Dropdown from "../Dropdown/Dropdown";
 import "./CardList.css";
 
 const initialState = {
@@ -82,10 +80,7 @@ class CardList extends React.Component {
       <div className="list">
         <div className="list-header" style={{ position: "relative" }}>
           <h4>{listName}</h4>
-          <Dropdown
-            menuTitle={<MoreHorizIcon />}
-            menuChildren={[<DeleteIcon onDeleteItem={this.onDeleteList} />]}
-          />
+          <MoreHorizIcon />
         </div>
         <ul>{cardsMap}</ul>
         {this.state.addCardToggle ? (
