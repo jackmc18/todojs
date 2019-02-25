@@ -9,6 +9,10 @@ import Typography from "@material-ui/core/Typography";
 const styles = theme => ({
   cardListPaper: {
     width: 275
+  },
+  cardList: {
+    listStyle: "none",
+    padding: 3
   }
 });
 
@@ -94,7 +98,7 @@ class CardList extends React.Component {
           </Typography>
           <MoreHorizIcon />
         </div>
-        <ul>{cardsMap}</ul>
+        <ul className={classes.cardList}>{cardsMap}</ul>
         {this.state.addCardToggle ? (
           <div>
             <textarea
