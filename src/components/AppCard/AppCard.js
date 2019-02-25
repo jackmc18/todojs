@@ -10,7 +10,14 @@ const styles = {
   card: {
     minWidth: 200,
     maxWidth: 275,
-    minHeight: 30
+    minHeight: 30,
+    padding: 3,
+    position: "relative"
+  },
+  edit: {
+    position: "absolute",
+    top: 0,
+    right: 0
   }
 };
 
@@ -78,7 +85,11 @@ class AppCard extends React.Component {
         >
           <div>
             {this.state.content}
-            {this.state.isHovering ? <EditIcon /> : null}
+            {this.state.isHovering ? (
+              <div className={classes.edit}>
+                <EditIcon />
+              </div>
+            ) : null}
           </div>
         </div>
       </Card>
