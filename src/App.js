@@ -98,30 +98,26 @@ class App extends Component {
 
     return (
       <div className={classes.root}>
-        {isSignedIn !== null ? (
-          <BrowserRouter>
-            <div className="app-container">
-              <Navigation isSignedIn={isSignedIn} signOut={this.onSignOut} />
-              <Route path="/" exact component={Home} />
-              <Route
-                path="/signin"
-                exact
-                render={props => <SignIn {...props} loadUser={this.loadUser} />}
-              />
-              <Route
-                path="/register"
-                render={props => (
-                  <Register {...props} loadUser={this.loadUser} />
-                )}
-              />
-              <Route
-                path="/boardList"
-                render={props => <BoardList {...props} user={user} />}
-              />
-              <Route name="board" path="/board/:id" component={Board} />
-            </div>
-          </BrowserRouter>
-        ) : null}
+        <BrowserRouter>
+          <div className="app-container">
+            <Navigation isSignedIn={isSignedIn} signOut={this.onSignOut} />
+            <Route path="/" exact component={Home} />
+            <Route
+              path="/signin"
+              exact
+              render={props => <SignIn {...props} loadUser={this.loadUser} />}
+            />
+            <Route
+              path="/register"
+              render={props => <Register {...props} loadUser={this.loadUser} />}
+            />
+            <Route
+              path="/boardList"
+              render={props => <BoardList {...props} user={user} />}
+            />
+            <Route name="board" path="/board/:id" component={Board} />
+          </div>
+        </BrowserRouter>
       </div>
     );
   }
