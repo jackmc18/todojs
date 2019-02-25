@@ -1,5 +1,18 @@
 import React from "react";
+import withStyles from "@material-ui/core/styles/withStyles";
+import PropTypes from "prop-types";
 import CardList from "../CardList/CardList";
+
+const styles = theme => ({
+  boardLists: {
+    listStyle: "none",
+    display: "flex",
+    padding: 0
+  },
+  list: {
+    paddingLeft: 10
+  }
+});
 
 const initialState = {
   board: {
@@ -179,10 +192,11 @@ class Board extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
     const { board } = this.state;
     const cardLists = this.state.cardLists.map((cardList, index) => {
       return (
-        <li key={index}>
+        <li className={classes.list} key={index}>
           <CardList
             cardList={cardList}
             onDeleteList={this.onDeleteList}
@@ -198,9 +212,9 @@ class Board extends React.Component {
         <div>
           <h3>{board.boardName}</h3>
           <div>
-            <ul>
+            <ul className={classes.boardLists}>
               {cardLists}
-              <li>
+              <li className={classes.list}>
                 {this.state.addListToggle ? (
                   <div>
                     <input
@@ -223,4 +237,8 @@ class Board extends React.Component {
   }
 }
 
-export default Board;
+Board.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(Board);
