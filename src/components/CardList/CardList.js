@@ -4,8 +4,6 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import AppCard from "../AppCard/AppCard";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import Paper from "@material-ui/core/Paper";
-import CardHeader from "@material-ui/core/CardHeader";
-import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 
 const styles = theme => ({
