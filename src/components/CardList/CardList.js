@@ -1,7 +1,18 @@
 import React from "react";
+import PropTypes from "prop-types";
+import withStyles from "@material-ui/core/styles/withStyles";
 import AppCard from "../AppCard/AppCard";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
-import "./CardList.css";
+import Paper from "@material-ui/core/Paper";
+import CardHeader from "@material-ui/core/CardHeader";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+
+const styles = theme => ({
+  cardListPaper: {
+    width: 275
+  }
+});
 
 const initialState = {
   listName: "",
@@ -62,6 +73,7 @@ class CardList extends React.Component {
   };
 
   render() {
+    const { classes } = this.props;
     const { listName, cards } = this.state;
 
     const cardsMap = cards.map((card, index) => {
@@ -77,33 +89,34 @@ class CardList extends React.Component {
     });
 
     return (
-      <div className="list">
-        <div className="list-header" style={{ position: "relative" }}>
-          <h4>{listName}</h4>
+      <Paper className={classes.cardListPaper}>
+        <div>
+          <Typography component="h3" variant="subtitle1">
+            {listName}
+          </Typography>
           <MoreHorizIcon />
         </div>
         <ul>{cardsMap}</ul>
         {this.state.addCardToggle ? (
-          <div className="add-card">
+          <div>
             <textarea
-              className="add-card"
               placeholder="Card Content"
               onChange={this.onAddCardNameChange}
             />
-            <button onClick={this.onAddCardConfirm} className="">
-              Add Card
-            </button>
+            <button onClick={this.onAddCardConfirm}>Add Card</button>
           </div>
         ) : (
-          <div className="add-card">
-            <button onClick={this.onAddCardToggle} className="">
-              Add Card
-            </button>
+          <div>
+            <button onClick={this.onAddCardToggle}>Add Card</button>
           </div>
         )}
-      </div>
+      </Paper>
     );
   }
 }
 
-export default CardList;
+CardList.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(CardList);
