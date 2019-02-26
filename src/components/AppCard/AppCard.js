@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 //import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-
+import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 
 const styles = {
@@ -84,7 +84,9 @@ class AppCard extends React.Component {
           onMouseLeave={this.handleMouseLeave}
         >
           <div>
-            {this.state.content}
+            <Typography component="h3" variant="subtitle1">
+              {this.state.content}
+            </Typography>
             {this.state.isHovering ? (
               <div className={classes.edit}>
                 <EditIcon />
