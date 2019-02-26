@@ -5,10 +5,13 @@ import AppCard from "../AppCard/AppCard";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
 const styles = theme => ({
   cardListPaper: {
-    width: 275
+    width: 275,
+    padding: 5
   },
   cardListHeader: {
     display: "flex",
@@ -16,7 +19,10 @@ const styles = theme => ({
   },
   cardList: {
     listStyle: "none",
-    padding: 3
+    padding: 0
+  },
+  newCardContent: {
+    width: "100%"
   }
 });
 
@@ -105,15 +111,19 @@ class CardList extends React.Component {
         <ul className={classes.cardList}>{cardsMap}</ul>
         {this.state.addCardToggle ? (
           <div>
-            <textarea
+            <TextField
+              className={classes.newCardContent}
+              label="Card Content"
+              multiline
+              variant="filled"
               placeholder="Card Content"
               onChange={this.onAddCardNameChange}
             />
-            <button onClick={this.onAddCardConfirm}>Add Card</button>
+            <Button onClick={this.onAddCardConfirm}>Add Card</Button>
           </div>
         ) : (
           <div>
-            <button onClick={this.onAddCardToggle}>Add Card</button>
+            <Button onClick={this.onAddCardToggle}>Add Card</Button>
           </div>
         )}
       </Paper>

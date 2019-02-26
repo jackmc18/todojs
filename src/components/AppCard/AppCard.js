@@ -12,6 +12,7 @@ const styles = {
     maxWidth: 275,
     minHeight: 30,
     padding: 3,
+    marginBottom: 5,
     position: "relative"
   },
   edit: {
