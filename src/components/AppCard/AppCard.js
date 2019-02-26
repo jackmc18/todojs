@@ -90,7 +90,8 @@ class AppCard extends React.Component {
 
   handleCloseEdit = () => {
     this.setState({
-      popAnchorEl: null
+      popAnchorEl: null,
+      isHovering: false
     });
   };
 
