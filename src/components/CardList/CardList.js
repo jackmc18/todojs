@@ -10,6 +10,10 @@ const styles = theme => ({
   cardListPaper: {
     width: 275
   },
+  cardListHeader: {
+    display: "flex",
+    justifyContent: "space-between"
+  },
   cardList: {
     listStyle: "none",
     padding: 3
@@ -92,7 +96,7 @@ class CardList extends React.Component {
 
     return (
       <Paper className={classes.cardListPaper}>
-        <div>
+        <div className={classes.cardListHeader}>
           <Typography component="h3" variant="subtitle1">
             {listName}
           </Typography>
