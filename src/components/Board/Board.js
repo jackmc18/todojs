@@ -2,6 +2,8 @@ import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 import PropTypes from "prop-types";
 import CardList from "../CardList/CardList";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
 const styles = theme => ({
   boardLists: {
@@ -217,15 +219,15 @@ class Board extends React.Component {
               <li className={classes.list}>
                 {this.state.addListToggle ? (
                   <div>
-                    <input
+                    <TextField
                       placeholder="List Name"
                       onChange={this.onAddListNameChange}
                     />
-                    <button onClick={this.onAddListConfirm}>Add List</button>
+                    <Button onClick={this.onAddListConfirm}>Add List</Button>
                   </div>
                 ) : (
                   <div>
-                    <button onClick={this.onAddListToggle}>Add List</button>
+                    <Button onClick={this.onAddListToggle}>Add List</Button>
                   </div>
                 )}
               </li>
