@@ -5,6 +5,8 @@ import { withStyles } from "@material-ui/core/styles";
 import EditIcon from "@material-ui/icons/Edit";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
+import Popover from "@material-ui/core/Popover";
+import IconButton from "@material-ui/core/IconButton";
 
 const styles = {
   card: {
@@ -15,10 +17,22 @@ const styles = {
     marginBottom: 5,
     position: "relative"
   },
-  edit: {
+  editCard: {
+    width: 265,
+    minHeight: 30,
+    padding: 3
+  },
+  editIconButton: {
     position: "absolute",
     top: 0,
-    right: 0
+    right: 0,
+    height: 10,
+    width: 10
+  },
+  editIcon: {
+    position: "absolute",
+    height: 16,
+    width: 16
   }
 };
 
@@ -27,7 +41,8 @@ const initialState = {
   content: "",
   position: null,
   listId: null,
-  isHovering: false
+  isHovering: false,
+  popAnchorEl: null
 };
 
 class AppCard extends React.Component {
@@ -64,6 +79,21 @@ class AppCard extends React.Component {
     }
   };
 
+  handleClickEdit = event => {
+    //console.log(event.currentTarget.parentElement.parentElement.parentElement);
+    const anchor =
+      event.currentTarget.parentElement.parentElement.parentElement;
+    this.setState({
+      popAnchorEl: anchor
+    });
+  };
+
+  handleCloseEdit = () => {
+    this.setState({
+      popAnchorEl: null
+    });
+  };
+
   handleMouseEnter = () => {
     this.setState({ isHovering: true });
   };
@@ -78,6 +108,8 @@ class AppCard extends React.Component {
 
   render() {
     const { classes } = this.props;
+    const { popAnchorEl } = this.state;
+    const openEditPopper = Boolean(popAnchorEl);
     return (
       <Card className={classes.card}>
         <div
@@ -89,10 +121,35 @@ class AppCard extends React.Component {
               {this.state.content}
             </Typography>
             {this.state.isHovering ? (
-              <div className={classes.edit}>
-                <EditIcon />
-              </div>
+              <IconButton
+                className={classes.editIconButton}
+                aria-owns={openEditPopper ? "edit-popper" : undefined}
+                aria-haspopup="true"
+                onClick={this.handleClickEdit}
+              >
+                <EditIcon className={classes.editIcon} />
+              </IconButton>
             ) : null}
+            <Popover
+              id="edit-popper"
+              open={openEditPopper}
+              anchorEl={popAnchorEl}
+              onClose={this.handleCloseEdit}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "center"
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "center"
+              }}
+            >
+              <Card className={classes.editCard}>
+                <Typography component="h3" variant="subtitle1">
+                  {this.state.content}
+                </Typography>
+              </Card>
+            </Popover>
           </div>
         </div>
       </Card>
