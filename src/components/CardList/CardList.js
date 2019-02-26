@@ -68,12 +68,14 @@ class CardList extends React.Component {
   };
 
   onAddCardConfirm = () => {
-    const newCard = {
-      cardContent: this.state.addCardContent,
-      listId: this.state.listId,
-      cardPosition: this.state.cards.length
-    };
-    this.props.onAddCard(newCard);
+    if (/\S/.test(this.state.addCardContent)) {
+      const newCard = {
+        cardContent: this.state.addCardContent,
+        listId: this.state.listId,
+        cardPosition: this.state.cards.length
+      };
+      this.props.onAddCard(newCard);
+    }
   };
 
   onAddCardNameChange = event => {

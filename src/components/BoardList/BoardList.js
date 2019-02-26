@@ -32,11 +32,15 @@ class BoardList extends React.Component {
           "Content-Type": "application/json",
           Authorization: token
         }
-      })
-        .then(resp => resp.json())
-        .then(data => {
-          if (data.length) this.setState({ boards: data });
-        });
+      }).then(resp => {
+        if (resp.status !== 401) {
+          resp.json().then(data => {
+            if (data.length) this.setState({ boards: data });
+          });
+        } else {
+          this.setState({ redirectToSignin: true });
+        }
+      });
     } else {
       this.setState({ redirectToSignin: true });
     }
