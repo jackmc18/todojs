@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import withRoot from "./withRoot";
 
 import Navigation from "./components/Navigation/Navigation";
 import Home from "./components/Home/Home";
@@ -9,9 +10,6 @@ import SignIn from "./components/SignIn/SignIn";
 import Register from "./components/Register/Register";
 import BoardList from "./components/BoardList/BoardList";
 import Board from "./components/Board/Board";
-
-import withRoot from "./withRoot";
-import "./App.css";
 
 const initialState = {
   isSignedIn: null,
