@@ -97,6 +97,7 @@ class CardList extends React.Component {
             className="card-class-name"
             card={card}
             onDeleteCard={this.props.onDeleteCard}
+            onEditCardContent={this.props.onEditCardContent}
           />
         </li>
       );

@@ -193,6 +193,40 @@ class Board extends React.Component {
     }
   };
 
+  onEditCardContent = (cardId, cardContent) => {
+    const token = window.sessionStorage.getItem("token");
+    if (token) {
+      fetch("http://localhost:3000/editcardcontent", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        body: JSON.stringify({
+          cardId: cardId,
+          cardContent: cardContent
+        })
+      })
+        .then(response => response.json())
+        .then(card => {
+          if (card.card_id === cardId) {
+            const newCardLists = this.state.cardLists.map(list => {
+              if (list.listId === card.list_id) {
+                list.cards = list.cards.map(mCard => {
+                  if (mCard.cardId === card.card_id) {
+                    mCard.cardContent = cardContent;
+                  }
+                  return mCard;
+                });
+              }
+              return list;
+            });
+            this.setState({ cardLists: newCardLists });
+          }
+        });
+    }
+  };
+
   render() {
     const { classes } = this.props;
     const { board } = this.state;
@@ -204,6 +238,7 @@ class Board extends React.Component {
             onDeleteList={this.onDeleteList}
             onAddCard={this.onAddCard}
             onDeleteCard={this.onDeleteCard}
+            onEditCardContent={this.onEditCardContent}
           />
         </li>
       );

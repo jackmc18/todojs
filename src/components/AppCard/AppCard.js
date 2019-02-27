@@ -68,14 +68,18 @@ class AppCard extends React.Component {
 
   handleUpdateCardState = () => {
     const { card } = this.props;
-    const { cardId, position } = this.state;
+    const { cardId, position, content } = this.state;
     // card
     // -cardContent
     // -cardId
     // -cardPosition
     // -listId
     // -created
-    if (card.cardId !== cardId || card.cardPosition !== position) {
+    if (
+      card.cardId !== cardId ||
+      card.cardPosition !== position ||
+      card.cardContent !== content
+    ) {
       this.setState({
         cardId: card.cardId,
         content: card.cardContent,
@@ -116,7 +120,8 @@ class AppCard extends React.Component {
 
   onSaveCard = () => {
     this.handleCloseEdit();
-    this.setState({ content: this.state.editedContent });
+    //this.setState({ content: this.state.editedContent });
+    this.props.onEditCardContent(this.state.cardId, this.state.editedContent);
   };
 
   onDeleteCard = () => {
