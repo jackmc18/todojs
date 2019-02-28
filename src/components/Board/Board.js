@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import CardList from "../CardList/CardList";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
 
 const styles = theme => ({
   boardLists: {
@@ -247,7 +248,9 @@ class Board extends React.Component {
     return (
       <div>
         <div>
-          <h3>{board.boardName}</h3>
+          <Typography component="h2" variant="h6">
+            {board.boardName}
+          </Typography>
           <div>
             <ul className={classes.boardLists}>
               {cardLists}
