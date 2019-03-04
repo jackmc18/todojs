@@ -11,7 +11,7 @@ const initialState = {
   boards: [],
   createBoardFlag: false,
   createBoardName: "",
-  redirectToSignin: false,
+  redirectToLogin: false,
   redirectToCreated: false,
   createdId: null
 };
@@ -38,11 +38,11 @@ class BoardList extends React.Component {
             if (data.length) this.setState({ boards: data });
           });
         } else {
-          this.setState({ redirectToSignin: true });
+          this.setState({ redirectToLogin: true });
         }
       });
     } else {
-      this.setState({ redirectToSignin: true });
+      this.setState({ redirectToLogin: true });
     }
   };
 
@@ -76,7 +76,7 @@ class BoardList extends React.Component {
           this.setState({ createdId: boardId, redirectToCreated: true });
         });
     } else {
-      this.setState({ redirectToSignin: true });
+      this.setState({ redirectToLogin: true });
     }
   };
 
@@ -86,13 +86,13 @@ class BoardList extends React.Component {
 
   render() {
     const {
-      redirectToSignin,
+      redirectToLogin,
       redirectToCreated,
       boards,
       createdId
     } = this.state;
-    if (redirectToSignin) {
-      return <Redirect to="/signin" />;
+    if (redirectToLogin) {
+      return <Redirect to="/login" />;
     } else if (redirectToCreated) {
       return <Redirect to={`/board/${createdId}`} />;
     }

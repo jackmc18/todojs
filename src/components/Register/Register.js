@@ -51,7 +51,7 @@ class Register extends React.Component {
       email: "",
       password: "",
       name: "",
-      isSignedIn: false
+      isLoggedIn: false
     };
   }
 
@@ -82,16 +82,16 @@ class Register extends React.Component {
       .then(user => {
         if (user.id) {
           this.props.loadUser(user);
-          this.setState({ isSignedIn: true });
+          this.setState({ isLoggedIn: true });
         }
       });
   };
 
   render() {
-    const { isSignedIn } = this.state;
+    const { isLoggedIn } = this.state;
     const { classes } = this.props;
 
-    if (isSignedIn) {
+    if (isLoggedIn) {
       return <Redirect to="/boardList" />;
     }
 

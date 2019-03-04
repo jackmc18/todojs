@@ -44,34 +44,34 @@ const styles = theme => ({
   }
 });
 
-class SignIn extends React.Component {
+class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      signInEmail: "",
-      signInPassword: "",
-      isSignedIn: false
+      LoginEmail: "",
+      LoginPassword: "",
+      isLoggedIn: false
     };
   }
   onEmailChange = event => {
-    this.setState({ signInEmail: event.target.value });
+    this.setState({ LoginEmail: event.target.value });
   };
   onPasswordChange = event => {
-    this.setState({ signInPassword: event.target.value });
+    this.setState({ LoginPassword: event.target.value });
   };
 
   saveAuthToken = token => {
     window.sessionStorage.setItem("token", token);
   };
 
-  onSubmitSignIn = event => {
+  onSubmitLogin = event => {
     event.preventDefault();
     fetch("http://localhost:3000/login", {
       method: "post",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        email: this.state.signInEmail,
-        password: this.state.signInPassword
+        email: this.state.LoginEmail,
+        password: this.state.LoginPassword
       })
     })
       .then(response => response.json())
@@ -89,7 +89,7 @@ class SignIn extends React.Component {
             .then(user => {
               if (user && user.email) {
                 this.props.loadUser(user);
-                this.setState({ isSignedIn: true });
+                this.setState({ isLoggedIn: true });
               }
             });
         }
@@ -97,10 +97,10 @@ class SignIn extends React.Component {
   };
 
   render() {
-    const { isSignedIn } = this.state;
+    const { isLoggedIn } = this.state;
     const { classes } = this.props;
 
-    if (isSignedIn) {
+    if (isLoggedIn) {
       return <Redirect to="/boardList" />;
     }
 
@@ -112,7 +112,7 @@ class SignIn extends React.Component {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component="h1" variant="h5">
-              Sign in
+              Login
             </Typography>
             <form className={classes.form}>
               <FormControl margin="normal" required fullWidth>
@@ -141,9 +141,9 @@ class SignIn extends React.Component {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-                onClick={this.onSubmitSignIn}
+                onClick={this.onSubmitLogin}
               >
-                Sign in
+                Login
               </Button>
               <Button
                 component={Link}
@@ -164,8 +164,8 @@ class SignIn extends React.Component {
   }
 }
 
-SignIn.propTypes = {
+Login.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(SignIn);
+export default withStyles(styles)(Login);

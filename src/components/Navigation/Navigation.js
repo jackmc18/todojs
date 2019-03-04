@@ -35,10 +35,10 @@ const initialState = {
 class Navigation extends React.Component {
   state = initialState;
 
-  onSignOut = event => {
+  onLogOut = event => {
     event.preventDefault();
-    this.props.signOut();
-    this.props.history.push("/signin");
+    this.props.logOut();
+    this.props.history.push("/login");
   };
 
   handleMenuToggle = () => {
@@ -64,7 +64,7 @@ class Navigation extends React.Component {
   };
 
   render() {
-    const { isSignedIn, classes } = this.props;
+    const { isLoggedIn, classes } = this.props;
     const { menuOpen } = this.state;
 
     return (
@@ -117,14 +117,14 @@ class Navigation extends React.Component {
             <Typography variant="h6" color="inherit" className={classes.grow}>
               TODOJS
             </Typography>
-            {isSignedIn !== null ? (
-              isSignedIn ? (
-                <Button onClick={this.onSignOut} color="inherit">
-                  Sign Out
+            {isLoggedIn !== null ? (
+              isLoggedIn ? (
+                <Button onClick={this.onLogOut} color="inherit">
+                  Log Out
                 </Button>
               ) : (
-                <Button onClick={this.onSignOut} color="inherit">
-                  Sign In
+                <Button onClick={this.onLogOut} color="inherit">
+                  Log In
                 </Button>
               )
             ) : null}

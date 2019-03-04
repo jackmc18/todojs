@@ -6,13 +6,13 @@ import withRoot from "./withRoot";
 
 import Navigation from "./components/Navigation/Navigation";
 import Home from "./components/Home/Home";
-import SignIn from "./components/SignIn/SignIn";
+import Login from "./components/Login/Login";
 import Register from "./components/Register/Register";
 import BoardList from "./components/BoardList/BoardList";
 import Board from "./components/Board/Board";
 
 const initialState = {
-  isSignedIn: null,
+  isLoggedIn: null,
   user: {
     id: "",
     name: "",
@@ -67,7 +67,7 @@ class App extends Component {
 
   loadUser = data => {
     this.setState({
-      isSignedIn: true,
+      isLoggedIn: true,
       user: {
         id: data.id,
         name: data.name,
@@ -77,10 +77,10 @@ class App extends Component {
     });
   };
 
-  onSignOut = () => {
+  onLogOut = () => {
     //event.preventDefault();
     this.setState({
-      isSignedIn: false,
+      isLoggedIn: false,
       user: {
         id: "",
         name: "",
@@ -92,18 +92,18 @@ class App extends Component {
 
   render() {
     const { classes } = this.props;
-    const { isSignedIn, user } = this.state;
+    const { isLoggedIn, user } = this.state;
 
     return (
       <div className={classes.root}>
         <BrowserRouter>
           <div className="app-container">
-            <Navigation isSignedIn={isSignedIn} signOut={this.onSignOut} />
+            <Navigation isLoggedIn={isLoggedIn} logOut={this.onLogOut} />
             <Route path="/" exact component={Home} />
             <Route
-              path="/signin"
+              path="/login"
               exact
-              render={props => <SignIn {...props} loadUser={this.loadUser} />}
+              render={props => <Login {...props} loadUser={this.loadUser} />}
             />
             <Route
               path="/register"
