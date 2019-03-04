@@ -36,7 +36,7 @@ class App extends Component {
   checkAuth = () => {
     const token = window.sessionStorage.getItem("token");
     if (token) {
-      fetch("http://localhost:3000/signin", {
+      fetch("http://localhost:3000/login", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
