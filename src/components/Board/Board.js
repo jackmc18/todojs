@@ -5,6 +5,7 @@ import CardList from "../CardList/CardList";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 const styles = theme => ({
   boardLists: {
@@ -64,6 +65,10 @@ class Board extends React.Component {
 
   onAddListToggle = () => {
     this.setState({ addListToggle: true });
+  };
+
+  handleClickAway = () => {
+    this.setState({ addListToggle: false });
   };
 
   onAddListConfirm = () => {
@@ -255,19 +260,21 @@ class Board extends React.Component {
             <ul className={classes.boardLists}>
               {cardLists}
               <li className={classes.list}>
-                {this.state.addListToggle ? (
-                  <div>
-                    <TextField
-                      placeholder="List Name"
-                      onChange={this.onAddListNameChange}
-                    />
-                    <Button onClick={this.onAddListConfirm}>Add List</Button>
-                  </div>
-                ) : (
-                  <div>
-                    <Button onClick={this.onAddListToggle}>Add List</Button>
-                  </div>
-                )}
+                <ClickAwayListener onClickAway={this.handleClickAway}>
+                  {this.state.addListToggle ? (
+                    <div>
+                      <TextField
+                        placeholder="List Name"
+                        onChange={this.onAddListNameChange}
+                      />
+                      <Button onClick={this.onAddListConfirm}>Add List</Button>
+                    </div>
+                  ) : (
+                    <div>
+                      <Button onClick={this.onAddListToggle}>Add List</Button>
+                    </div>
+                  )}
+                </ClickAwayListener>
               </li>
             </ul>
           </div>
