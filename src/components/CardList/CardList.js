@@ -7,6 +7,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 const styles = theme => ({
   cardListPaper: {
@@ -67,6 +68,10 @@ class CardList extends React.Component {
     this.setState({ addCardToggle: true });
   };
 
+  handleClickAway = () => {
+    this.setState({ addCardToggle: false });
+  };
+
   onAddCardConfirm = () => {
     if (/\S/.test(this.state.addCardContent)) {
       const newCard = {
@@ -112,23 +117,25 @@ class CardList extends React.Component {
           <MoreHorizIcon />
         </div>
         <ul className={classes.cardList}>{cardsMap}</ul>
-        {this.state.addCardToggle ? (
-          <div>
-            <TextField
-              className={classes.newCardContent}
-              label="Card Content"
-              multiline
-              variant="filled"
-              placeholder="Card Content"
-              onChange={this.onAddCardNameChange}
-            />
-            <Button onClick={this.onAddCardConfirm}>Add Card</Button>
-          </div>
-        ) : (
-          <div>
-            <Button onClick={this.onAddCardToggle}>Add Card</Button>
-          </div>
-        )}
+        <ClickAwayListener onClickAway={this.handleClickAway}>
+          {this.state.addCardToggle ? (
+            <div>
+              <TextField
+                className={classes.newCardContent}
+                label="Card Content"
+                multiline
+                variant="filled"
+                placeholder="Card Content"
+                onChange={this.onAddCardNameChange}
+              />
+              <Button onClick={this.onAddCardConfirm}>Add Card</Button>
+            </div>
+          ) : (
+            <div>
+              <Button onClick={this.onAddCardToggle}>Add Card</Button>
+            </div>
+          )}
+        </ClickAwayListener>
       </Paper>
     );
   }
