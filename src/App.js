@@ -78,7 +78,7 @@ class App extends Component {
   };
 
   onLogOut = () => {
-    //event.preventDefault();
+    window.sessionStorage.removeItem("token");
     this.setState({
       isLoggedIn: false,
       user: {
