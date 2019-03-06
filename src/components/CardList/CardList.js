@@ -8,6 +8,8 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+import IconButton from "@material-ui/core/IconButton";
+import Popover from "@material-ui/core/Popover";
 
 const styles = theme => ({
   cardListPaper: {
@@ -17,6 +19,16 @@ const styles = theme => ({
   cardListHeader: {
     display: "flex",
     justifyContent: "space-between"
+  },
+  moreIconButton: {
+    height: 10,
+    width: 10
+  },
+  moreIcon: {
+    position: "fixed"
+  },
+  moreMenu: {
+    zIndex: 1
   },
   cardList: {
     listStyle: "none",
@@ -31,6 +43,8 @@ const initialState = {
   listName: "",
   listId: null,
   cards: [],
+  openMoreMenu: false,
+  openMoreAnchor: null,
   addCardToggle: false,
   addCardContent: ""
 };
@@ -73,6 +87,7 @@ class CardList extends React.Component {
   };
 
   onAddCardConfirm = () => {
+    // Check if the content is only white space
     if (/\S/.test(this.state.addCardContent)) {
       const newCard = {
         cardContent: this.state.addCardContent,
@@ -87,13 +102,21 @@ class CardList extends React.Component {
     this.setState({ addCardContent: event.target.value });
   };
 
+  handleClickMore = event => {
+    this.setState({ openMoreMenu: true, openMoreAnchor: event.currentTarget });
+  };
+
+  handleCloseMore = event => {
+    this.setState({ openMoreMenu: false, openMoreAnchor: null });
+  };
+
   onDeleteList = () => {
     this.props.onDeleteList(this.state.listId);
   };
 
   render() {
     const { classes } = this.props;
-    const { listName, cards } = this.state;
+    const { listName, cards, openMoreMenu, openMoreAnchor } = this.state;
 
     const cardsMap = cards.map((card, index) => {
       return (
@@ -114,7 +137,32 @@ class CardList extends React.Component {
           <Typography component="h3" variant="subtitle1">
             {listName}
           </Typography>
-          <MoreHorizIcon />
+          <IconButton
+            className={classes.moreIconButton}
+            aria-owns={openMoreMenu ? "more-menu" : undefined}
+            aria-haspopup="true"
+            onClick={this.handleClickMore}
+          >
+            <MoreHorizIcon className={classes.moreIcon} />
+          </IconButton>
+          <Popover
+            id="more-menu"
+            open={openMoreMenu}
+            anchorEl={openMoreAnchor}
+            onClose={this.handleCloseMore}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "center"
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "center"
+            }}
+          >
+            <Button onClick={this.onDeleteList}>
+              <Typography>Delete</Typography>
+            </Button>
+          </Popover>
         </div>
         <ul className={classes.cardList}>{cardsMap}</ul>
         <ClickAwayListener onClickAway={this.handleClickAway}>
