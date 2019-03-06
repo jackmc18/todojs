@@ -22,6 +22,9 @@ const styles = {
   grow: {
     flexGrow: 1
   },
+  menu: {
+    zIndex: 1
+  },
   menuButton: {
     marginLeft: -12,
     marginRight: 20
@@ -85,6 +88,7 @@ class Navigation extends React.Component {
               <MenuIcon />
             </IconButton>
             <Popper
+              className={classes.menu}
               open={menuOpen}
               anchorEl={this.anchorEl}
               transition
