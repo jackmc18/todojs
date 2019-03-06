@@ -38,7 +38,7 @@ class Board extends React.Component {
     const { id } = this.props.match.params;
     const token = window.sessionStorage.getItem("token");
     if (token) {
-      fetch(`http://localhost:3000/getboard/`, {
+      fetch(`http://localhost:3000/get-board/`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -73,7 +73,7 @@ class Board extends React.Component {
     });
     const token = window.sessionStorage.getItem("token");
     if (token) {
-      fetch(`http://localhost:3000/createlist/`, {
+      fetch(`http://localhost:3000/create-list/`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -100,7 +100,7 @@ class Board extends React.Component {
   onDeleteList = listId => {
     const token = window.sessionStorage.getItem("token");
     if (token) {
-      fetch("http://localhost:3000/deletelist/", {
+      fetch("http://localhost:3000/delete-list/", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -124,7 +124,7 @@ class Board extends React.Component {
   onAddCard = newCard => {
     const token = window.sessionStorage.getItem("token");
     if (token) {
-      fetch(`http://localhost:3000/createcard`, {
+      fetch(`http://localhost:3000/create-card`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -161,7 +161,7 @@ class Board extends React.Component {
   onDeleteCard = cardId => {
     const token = window.sessionStorage.getItem("token");
     if (token) {
-      fetch("http://localhost:3000/deletecard/", {
+      fetch("http://localhost:3000/delete-card/", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
@@ -197,7 +197,7 @@ class Board extends React.Component {
   onEditCardContent = (cardId, cardContent) => {
     const token = window.sessionStorage.getItem("token");
     if (token) {
-      fetch("http://localhost:3000/editcardcontent", {
+      fetch("http://localhost:3000/edit-card-content", {
         method: "post",
         headers: {
           "Content-Type": "application/json",

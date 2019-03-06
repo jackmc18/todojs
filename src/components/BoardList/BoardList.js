@@ -26,7 +26,7 @@ class BoardList extends React.Component {
   getBoards = () => {
     const token = window.sessionStorage.getItem("token");
     if (token) {
-      fetch(`http://localhost:3000/boardlist/`, {
+      fetch(`http://localhost:3000/board-list/`, {
         method: "get",
         headers: {
           "Content-Type": "application/json",
@@ -61,7 +61,7 @@ class BoardList extends React.Component {
     });
     const token = window.sessionStorage.getItem("token");
     if (token) {
-      fetch(`http://localhost:3000/createboard/`, {
+      fetch(`http://localhost:3000/create-board/`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",
