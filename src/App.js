@@ -12,7 +12,7 @@ import BoardList from "./components/BoardList/BoardList";
 import Board from "./components/Board/Board";
 
 const initialState = {
-  isLoggedIn: null,
+  isLoggedIn: false,
   user: {
     id: "",
     name: "",
