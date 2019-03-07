@@ -3,7 +3,6 @@ import { BrowserRouter, Route } from "react-router-dom";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import withRoot from "./withRoot";
-
 import Navigation from "./components/Navigation/Navigation";
 import Home from "./components/Home/Home";
 import Login from "./components/Login/Login";
