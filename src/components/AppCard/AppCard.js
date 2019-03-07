@@ -38,7 +38,8 @@ const styles = {
     width: 16
   },
   editMenu: {
-    float: "right"
+    display: "flex",
+    justifyContent: "space-between"
   },
   editCardContent: {
     width: "100%"
@@ -179,11 +180,11 @@ class AppCard extends React.Component {
                   onChange={this.onEditCardContent}
                 />
               </Card>
-              <Button onClick={this.onSaveCard}>
-                <SaveIcon />
-                <Typography>Save</Typography>
-              </Button>
               <div className={classes.editMenu}>
+                <Button onClick={this.onSaveCard}>
+                  <SaveIcon />
+                  <Typography>Save</Typography>
+                </Button>
                 <Button onClick={this.onDeleteCard}>
                   <DeleteIcon />
                   <Typography>Delete</Typography>
