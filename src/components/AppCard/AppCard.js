@@ -121,7 +121,6 @@ class AppCard extends React.Component {
 
   onSaveCard = () => {
     this.handleCloseEdit();
-    //this.setState({ content: this.state.editedContent });
     this.props.onEditCardContent(this.state.cardId, this.state.editedContent);
   };
 
