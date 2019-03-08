@@ -25,7 +25,7 @@ const styles = theme => ({
     width: 10
   },
   moreIcon: {
-    position: "fixed"
+    position: "absolute"
   },
   moreMenu: {
     zIndex: 1
