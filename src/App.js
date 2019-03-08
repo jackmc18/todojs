@@ -20,7 +20,11 @@ const initialState = {
   }
 };
 
-const styles = theme => ({});
+const styles = theme => ({
+  root: {
+    display: "block"
+  }
+});
 
 class App extends Component {
   constructor() {

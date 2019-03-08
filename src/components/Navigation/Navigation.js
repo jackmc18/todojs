@@ -17,7 +17,7 @@ import Popper from "@material-ui/core/Popper";
 
 const styles = {
   nav: {
-    flexGrow: 1
+    display: "flex"
   },
   grow: {
     flexGrow: 1

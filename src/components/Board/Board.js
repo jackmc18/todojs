@@ -8,10 +8,19 @@ import Typography from "@material-ui/core/Typography";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 
 const styles = theme => ({
-  boardLists: {
-    listStyle: "none",
+  board: {
     display: "flex",
-    padding: 0
+    flexDirection: "column",
+    height: "100%"
+  },
+  boardLists: {
+    display: "flex",
+    flex: 1,
+    flexDirection: "row",
+    overflowX: "auto",
+    listStyle: "none",
+    padding: 0,
+    margin: 0
   },
   list: {
     paddingLeft: 10
@@ -252,34 +261,31 @@ class Board extends React.Component {
     });
 
     return (
-      <div>
-        <div>
-          <Typography component="h2" variant="h6">
-            {board.boardName}
-          </Typography>
-          <div>
-            <ul className={classes.boardLists}>
-              {cardLists}
-              <li className={classes.list}>
-                <ClickAwayListener onClickAway={this.handleClickAway}>
-                  {this.state.addListToggle ? (
-                    <div>
-                      <TextField
-                        placeholder="List Name"
-                        onChange={this.onAddListNameChange}
-                      />
-                      <Button onClick={this.onAddListConfirm}>Add List</Button>
-                    </div>
-                  ) : (
-                    <div>
-                      <Button onClick={this.onAddListToggle}>Add List</Button>
-                    </div>
-                  )}
-                </ClickAwayListener>
-              </li>
-            </ul>
-          </div>
-        </div>
+      <div className={classes.board}>
+        <Typography component="h2" variant="h6">
+          {board.boardName}
+        </Typography>
+
+        <ul className={classes.boardLists}>
+          {cardLists}
+          <li className={classes.list}>
+            <ClickAwayListener onClickAway={this.handleClickAway}>
+              {this.state.addListToggle ? (
+                <div>
+                  <TextField
+                    placeholder="List Name"
+                    onChange={this.onAddListNameChange}
+                  />
+                  <Button onClick={this.onAddListConfirm}>Add List</Button>
+                </div>
+              ) : (
+                <div>
+                  <Button onClick={this.onAddListToggle}>Add List</Button>
+                </div>
+              )}
+            </ClickAwayListener>
+          </li>
+        </ul>
       </div>
     );
   }
