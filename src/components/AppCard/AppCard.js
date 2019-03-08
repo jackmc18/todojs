@@ -1,20 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-import SaveIcon from "@material-ui/icons/Save";
-import ArrowRightAltIcon from "@material-ui/icons/ArrowRightAlt";
 import Typography from "@material-ui/core/Typography";
 import Card from "@material-ui/core/Card";
 import Popover from "@material-ui/core/Popover";
 import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import InputLabel from "@material-ui/core/InputLabel";
+
+import EditCardMenu from "../EditCardMenu/EditCardMenu";
 
 const styles = {
   card: {
@@ -131,7 +124,6 @@ class AppCard extends React.Component {
   };
 
   handleClickMove = event => {
-    console.log(this.props.lists);
     this.setState({
       movePopAnchorEl: event.currentTarget
     });
@@ -149,13 +141,9 @@ class AppCard extends React.Component {
     this.setState({ isHovering: false });
   };
 
-  onEditCardContent = event => {
-    this.setState({ editedContent: event.target.value });
-  };
-
-  onSaveCard = () => {
+  onSaveCard = content => {
     this.handleCloseEdit();
-    this.props.onEditCardContent(this.state.cardId, this.state.editedContent);
+    this.props.onEditCardContent(this.state.cardId, content);
   };
 
   onDeleteCard = () => {
@@ -165,9 +153,8 @@ class AppCard extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { editPopAnchorEl, movePopAnchorEl } = this.state;
+    const { editPopAnchorEl } = this.state;
     const openEditPopover = Boolean(editPopAnchorEl);
-    const openMovePopover = Boolean(movePopAnchorEl);
     return (
       <Card className={classes.card}>
         <div
@@ -202,92 +189,11 @@ class AppCard extends React.Component {
                 horizontal: "center"
               }}
             >
-              <Card className={classes.editCard}>
-                <TextField
-                  id="edit-card-field"
-                  name="edit"
-                  className={classes.editCardContent}
-                  value={this.state.editedContent}
-                  label="Card Content"
-                  multiline
-                  variant="filled"
-                  onChange={this.onEditCardContent}
-                />
-              </Card>
-              <div className={classes.editMenu}>
-                <Button
-                  className={classes.menuButton}
-                  onClick={this.onSaveCard}
-                >
-                  <SaveIcon />
-                  <Typography>Save</Typography>
-                </Button>
-                <Button
-                  className={classes.menuButton}
-                  aria-owns={openMovePopover ? "move-popover" : undefined}
-                  aria-haspopup="true"
-                  onClick={this.handleClickMove}
-                >
-                  <ArrowRightAltIcon />
-                  <Typography>Move</Typography>
-                </Button>
-                <Popover
-                  id="move-popover"
-                  open={openMovePopover}
-                  anchorEl={movePopAnchorEl}
-                  onClose={this.handleCloseMove}
-                  anchorOrigin={{
-                    vertical: "bottom",
-                    horizontal: "center"
-                  }}
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "center"
-                  }}
-                >
-                  <Card className={classes.moveCard}>
-                    <form className={classes.moveForm}>
-                      <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="move-list">List</InputLabel>
-                        <Select
-                          value=""
-                          inputProps={{
-                            name: "move-list",
-                            id: "move-list"
-                          }}
-                        >
-                          <MenuItem value="">
-                            <em>None</em>
-                          </MenuItem>
-                        </Select>
-                      </FormControl>
-                      <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="move-position">
-                          Position
-                        </InputLabel>
-                        <Select
-                          value=""
-                          inputProps={{
-                            name: "move-position",
-                            id: "move-position"
-                          }}
-                        >
-                          <MenuItem value="">
-                            <em>None</em>
-                          </MenuItem>
-                        </Select>
-                      </FormControl>
-                    </form>
-                  </Card>
-                </Popover>
-                <Button
-                  className={classes.menuButton}
-                  onClick={this.onDeleteCard}
-                >
-                  <DeleteIcon />
-                  <Typography>Delete</Typography>
-                </Button>
-              </div>
+              <EditCardMenu
+                onSaveCard={this.onSaveCard}
+                onDeleteCard={this.onDeleteCard}
+                content={this.state.content}
+              />
             </Popover>
           </div>
         </div>
