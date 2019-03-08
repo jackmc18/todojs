@@ -9,6 +9,7 @@ import Card from "@material-ui/core/Card";
 import Popover from "@material-ui/core/Popover";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import MoveCardMenu from "../MoveCardMenu/MoveCardMenu";
 
 const styles = {
   card: {
@@ -46,24 +47,12 @@ const styles = {
   },
   editCardContent: {
     width: "100%"
-  },
-  moveCard: {
-    width: 265,
-    minHeight: 30,
-    padding: 3
-  },
-  moveForm: {
-    display: "flex",
-    justifyContent: "space-between"
-  },
-  formControl: {
-    margin: 3,
-    minWidth: 100
   }
 };
 
 const initialState = {
-  editedContent: ""
+  editedContent: "",
+  movePopAnchorEl: null
 };
 
 class EditCardMenu extends React.Component {
@@ -77,8 +66,20 @@ class EditCardMenu extends React.Component {
     this.setState({ editedContent: event.target.value });
   };
 
+  handleClickMove = event => {
+    this.setState({
+      movePopAnchorEl: event.currentTarget
+    });
+  };
+
+  handleCloseMove = () => {
+    this.setState({ movePopAnchorEl: null });
+  };
+
   render() {
     const { classes } = this.props;
+    const { movePopAnchorEl } = this.state;
+    const openMovePopover = Boolean(movePopAnchorEl);
     return (
       <div>
         <Card className={classes.editCard}>
@@ -103,14 +104,14 @@ class EditCardMenu extends React.Component {
           </Button>
           <Button
             className={classes.menuButton}
-            // aria-owns={openMovePopover ? "move-popover" : undefined}
-            // aria-haspopup="true"
-            // onClick={this.handleClickMove}
+            aria-owns={openMovePopover ? "move-popover" : undefined}
+            aria-haspopup="true"
+            onClick={this.handleClickMove}
           >
             <ArrowRightAltIcon />
             <Typography>Move</Typography>
           </Button>
-          {/* <Popover
+          <Popover
             id="move-popover"
             open={openMovePopover}
             anchorEl={movePopAnchorEl}
@@ -124,39 +125,8 @@ class EditCardMenu extends React.Component {
               horizontal: "center"
             }}
           >
-            <Card className={classes.moveCard}>
-              <form className={classes.moveForm}>
-                <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="move-list">List</InputLabel>
-                  <Select
-                    value=""
-                    inputProps={{
-                      name: "move-list",
-                      id: "move-list"
-                    }}
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                  </Select>
-                </FormControl>
-                <FormControl className={classes.formControl}>
-                  <InputLabel htmlFor="move-position">Position</InputLabel>
-                  <Select
-                    value=""
-                    inputProps={{
-                      name: "move-position",
-                      id: "move-position"
-                    }}
-                  >
-                    <MenuItem value="">
-                      <em>None</em>
-                    </MenuItem>
-                  </Select>
-                </FormControl>
-              </form>
-            </Card>
-          </Popover> */}
+            <MoveCardMenu />
+          </Popover>
           <Button
             className={classes.menuButton}
             onClick={this.props.onDeleteCard}

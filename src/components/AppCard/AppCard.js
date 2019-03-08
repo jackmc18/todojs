@@ -123,16 +123,6 @@ class AppCard extends React.Component {
     });
   };
 
-  handleClickMove = event => {
-    this.setState({
-      movePopAnchorEl: event.currentTarget
-    });
-  };
-
-  handleCloseMove = () => {
-    this.setState({ movePopAnchorEl: null });
-  };
-
   handleMouseEnter = () => {
     this.setState({ isHovering: true });
   };
