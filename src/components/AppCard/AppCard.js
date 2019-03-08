@@ -131,6 +131,7 @@ class AppCard extends React.Component {
   };
 
   handleClickMove = event => {
+    console.log(this.props.lists);
     this.setState({
       movePopAnchorEl: event.currentTarget
     });

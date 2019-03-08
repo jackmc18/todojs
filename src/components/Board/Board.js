@@ -241,6 +241,7 @@ class Board extends React.Component {
         <li className={classes.list} key={index}>
           <CardList
             cardList={cardList}
+            lists={this.state.cardLists}
             onDeleteList={this.onDeleteList}
             onAddCard={this.onAddCard}
             onDeleteCard={this.onDeleteCard}

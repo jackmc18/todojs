@@ -115,7 +115,7 @@ class CardList extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, lists } = this.props;
     const { listName, cards, openMoreMenu, openMoreAnchor } = this.state;
 
     const cardsMap = cards.map((card, index) => {
@@ -124,6 +124,7 @@ class CardList extends React.Component {
           <AppCard
             className="card-class-name"
             card={card}
+            lists={lists}
             onDeleteCard={this.props.onDeleteCard}
             onEditCardContent={this.props.onEditCardContent}
           />
