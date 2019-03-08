@@ -125,7 +125,7 @@ class EditCardMenu extends React.Component {
               horizontal: "center"
             }}
           >
-            <MoveCardMenu />
+            <MoveCardMenu cardPosition={this.props.cardPosition} />
           </Popover>
           <Button
             className={classes.menuButton}

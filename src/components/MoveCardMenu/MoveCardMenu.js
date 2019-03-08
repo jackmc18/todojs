@@ -23,13 +23,19 @@ const styles = {
   }
 };
 
-const initialState = {};
+const initialState = {
+  moveToPosition: null
+};
 
 class MoveCardMenu extends React.Component {
   state = initialState;
 
+  componentWillMount() {
+    this.setState({ moveToPosition: this.props.cardPosition });
+  }
+
   render() {
-    const { classes } = this.props;
+    const { classes, cardPosition } = this.props;
     return (
       <Card className={classes.moveCard}>
         <form className={classes.moveForm}>
@@ -50,14 +56,14 @@ class MoveCardMenu extends React.Component {
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="move-position">Position</InputLabel>
             <Select
-              value=""
+              value={this.state.moveToPosition}
               inputProps={{
                 name: "move-position",
                 id: "move-position"
               }}
             >
-              <MenuItem value="">
-                <em>None</em>
+              <MenuItem value={cardPosition}>
+                <em>{cardPosition}</em>
               </MenuItem>
             </Select>
           </FormControl>
