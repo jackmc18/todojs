@@ -48,7 +48,6 @@ class MoveCardMenu extends React.Component {
   };
 
   handleChange = event => {
-    console.log("handling change for ", event.target);
     if (event.target.name === "move-position") {
       this.setState({ moveToPosition: event.target.value });
     }
