@@ -47,6 +47,13 @@ class MoveCardMenu extends React.Component {
     });
   };
 
+  handleChange = event => {
+    console.log("handling change for ", event.target);
+    if (event.target.name === "move-position") {
+      this.setState({ moveToPosition: event.target.value });
+    }
+  };
+
   render() {
     const { classes } = this.props;
     const listPositions = this.state.availablePositions.map(position => {
@@ -77,6 +84,7 @@ class MoveCardMenu extends React.Component {
             <InputLabel htmlFor="move-position">Position</InputLabel>
             <Select
               value={this.state.moveToPosition}
+              onChange={this.handleChange}
               inputProps={{
                 name: "move-position",
                 id: "move-position"
