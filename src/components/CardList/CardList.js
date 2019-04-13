@@ -127,6 +127,7 @@ class CardList extends React.Component {
             lists={lists}
             onDeleteCard={this.props.onDeleteCard}
             onEditCardContent={this.props.onEditCardContent}
+            onMoveCard={this.props.onMoveCard}
           />
         </li>
       );

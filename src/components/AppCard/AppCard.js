@@ -141,6 +141,23 @@ class AppCard extends React.Component {
     this.props.onDeleteCard(this.state.cardId);
   };
 
+  handleCardMove = (
+    cardId,
+    oldListId,
+    newListId,
+    oldCardPosition,
+    newCardPosition
+  ) => {
+    this.handleCloseEdit();
+    this.props.onMoveCard(
+      cardId,
+      oldListId,
+      newListId,
+      oldCardPosition,
+      newCardPosition
+    );
+  };
+
   render() {
     const { classes, lists } = this.props;
     const { editPopAnchorEl, position } = this.state;
@@ -182,10 +199,12 @@ class AppCard extends React.Component {
               <EditCardMenu
                 onSaveCard={this.onSaveCard}
                 onDeleteCard={this.onDeleteCard}
+                handleMoveCard={this.handleCardMove}
                 cardPosition={position}
                 content={this.state.content}
                 lists={lists}
                 listId={this.state.listId}
+                cardId={this.state.cardId}
               />
             </Popover>
           </div>

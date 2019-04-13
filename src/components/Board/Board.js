@@ -242,6 +242,38 @@ class Board extends React.Component {
     }
   };
 
+  onMoveCard = (
+    cardId,
+    oldCardList,
+    newCardList,
+    oldCardPosition,
+    newCardPosition
+  ) => {
+    const token = window.sessionStorage.getItem("token");
+    if (token) {
+      fetch("http://localhost:3000/move-card", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        body: JSON.stringify({
+          cardId: cardId,
+          oldCardList: oldCardList,
+          newCardList: newCardList,
+          oldCardPosition: oldCardPosition,
+          newCardPosition: newCardPosition
+        })
+      })
+        .then(response => response.json())
+        .then(card => {
+          if (card.card_id === cardId) {
+            this.displayLists();
+          }
+        });
+    }
+  };
+
   render() {
     const { classes } = this.props;
     const { board } = this.state;
@@ -255,6 +287,7 @@ class Board extends React.Component {
             onAddCard={this.onAddCard}
             onDeleteCard={this.onDeleteCard}
             onEditCardContent={this.onEditCardContent}
+            onMoveCard={this.onMoveCard}
           />
         </li>
       );

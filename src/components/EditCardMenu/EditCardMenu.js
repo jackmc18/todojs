@@ -127,8 +127,11 @@ class EditCardMenu extends React.Component {
           >
             <MoveCardMenu
               cardPosition={this.props.cardPosition}
+              handleMoveCard={this.props.handleMoveCard}
+              handleCloseMove={this.handleCloseMove}
               lists={lists}
               listId={listId}
+              cardId={this.props.cardId}
             />
           </Popover>
           <Button

@@ -6,6 +6,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
 const styles = {
   moveCard: {
@@ -25,6 +27,7 @@ const styles = {
 
 const initialState = {
   moveToPosition: null,
+  moveToList: null,
   availablePositions: []
 };
 
@@ -51,6 +54,17 @@ class MoveCardMenu extends React.Component {
     if (event.target.name === "move-position") {
       this.setState({ moveToPosition: event.target.value });
     }
+  };
+
+  handleClickMove = () => {
+    this.props.handleMoveCard(
+      this.props.cardId,
+      this.props.listId,
+      this.state.moveToList,
+      this.props.cardPosition,
+      this.state.moveToPosition
+    );
+    this.props.handleCloseMove();
   };
 
   render() {
@@ -93,6 +107,9 @@ class MoveCardMenu extends React.Component {
             </Select>
           </FormControl>
         </form>
+        <Button className={classes.menuButton} onClick={this.handleClickMove}>
+          <Typography>Move</Typography>
+        </Button>
       </Card>
     );
   }
