@@ -24,18 +24,38 @@ const styles = {
 };
 
 const initialState = {
-  moveToPosition: null
+  moveToPosition: null,
+  availablePositions: []
 };
 
 class MoveCardMenu extends React.Component {
   state = initialState;
 
   componentWillMount() {
-    this.setState({ moveToPosition: this.props.cardPosition });
+    this.addPositions();
   }
 
+  addPositions = () => {
+    const list = this.props.lists.filter(
+      list => list.listId === this.props.listId
+    );
+    const listLength = list[0].cards.length;
+    let positions = Array.from(Array(listLength).keys());
+    this.setState({
+      availablePositions: positions,
+      moveToPosition: this.props.cardPosition
+    });
+  };
+
   render() {
-    const { classes, cardPosition } = this.props;
+    const { classes } = this.props;
+    const listPositions = this.state.availablePositions.map(position => {
+      return (
+        <MenuItem value={position} key={position}>
+          <em>{position}</em>
+        </MenuItem>
+      );
+    });
     return (
       <Card className={classes.moveCard}>
         <form className={classes.moveForm}>
@@ -62,9 +82,10 @@ class MoveCardMenu extends React.Component {
                 id: "move-position"
               }}
             >
-              <MenuItem value={cardPosition}>
+              {listPositions}
+              {/* <MenuItem value={cardPosition}>
                 <em>{cardPosition}</em>
-              </MenuItem>
+              </MenuItem> */}
             </Select>
           </FormControl>
         </form>

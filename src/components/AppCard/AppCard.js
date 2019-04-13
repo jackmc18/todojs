@@ -142,7 +142,7 @@ class AppCard extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, lists } = this.props;
     const { editPopAnchorEl, position } = this.state;
     const openEditPopover = Boolean(editPopAnchorEl);
     return (
@@ -184,6 +184,8 @@ class AppCard extends React.Component {
                 onDeleteCard={this.onDeleteCard}
                 cardPosition={position}
                 content={this.state.content}
+                lists={lists}
+                listId={this.state.listId}
               />
             </Popover>
           </div>

@@ -77,7 +77,7 @@ class EditCardMenu extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, lists, listId } = this.props;
     const { movePopAnchorEl } = this.state;
     const openMovePopover = Boolean(movePopAnchorEl);
     return (
@@ -125,7 +125,11 @@ class EditCardMenu extends React.Component {
               horizontal: "center"
             }}
           >
-            <MoveCardMenu cardPosition={this.props.cardPosition} />
+            <MoveCardMenu
+              cardPosition={this.props.cardPosition}
+              lists={lists}
+              listId={listId}
+            />
           </Popover>
           <Button
             className={classes.menuButton}
