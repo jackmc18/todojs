@@ -91,9 +91,6 @@ class MoveCardMenu extends React.Component {
               }}
             >
               {listPositions}
-              {/* <MenuItem value={cardPosition}>
-                <em>{cardPosition}</em>
-              </MenuItem> */}
             </Select>
           </FormControl>
         </form>
