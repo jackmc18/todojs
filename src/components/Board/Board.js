@@ -293,29 +293,30 @@ class Board extends React.Component {
     newCardLists = this.updatePositions(oldCardList, newCardList, newCardLists);
     this.setState({ cardLists: newCardLists });
 
-    // const token = window.sessionStorage.getItem("token");
-    // if (token) {
-    //   fetch("http://localhost:3000/move-card", {
-    //     method: "post",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       Authorization: token
-    //     },
-    //     body: JSON.stringify({
-    //       cardId: cardId,
-    //       oldCardList: oldCardList,
-    //       newCardList: newCardList,
-    //       oldCardPosition: oldCardPosition,
-    //       newCardPosition: newCardPosition
-    //     })
-    //   })
-    //     .then(response => response.json())
-    //     .then(card => {
-    //       if (card.card_id === cardId) {
-    //         this.displayLists();
-    //       }
-    //     });
-    // }
+    const token = window.sessionStorage.getItem("token");
+    if (token) {
+      fetch("http://localhost:3000/move-card", {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token
+        },
+        body: JSON.stringify({
+          cardId: cardId,
+          oldCardList: oldCardList,
+          newCardList: newCardList,
+          oldCardPosition: oldCardPosition,
+          newCardPosition: newCardPosition
+        })
+      })
+        .then(response => response.json())
+        .then(card => {
+          if (card.card_id !== cardId) {
+            console.log("This is wrong");
+            this.displayLists();
+          }
+        });
+    }
   };
 
   render() {
