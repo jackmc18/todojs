@@ -6,6 +6,7 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+var _ = require("lodash");
 
 const styles = theme => ({
   board: {
@@ -242,6 +243,20 @@ class Board extends React.Component {
     }
   };
 
+  updatePositions = (oldListId, newListId, cardLists) => {
+    const newCardLists = cardLists.map(list => {
+      if (list.listId === oldListId || list.listId === newListId) {
+        const newCards = list.cards.map(card => {
+          card.cardPosition = list.cards.indexOf(card);
+          return card;
+        });
+        list.cards = newCards;
+      }
+      return list;
+    });
+    return newCardLists;
+  };
+
   onMoveCard = (
     cardId,
     oldCardList,
@@ -249,29 +264,58 @@ class Board extends React.Component {
     oldCardPosition,
     newCardPosition
   ) => {
-    const token = window.sessionStorage.getItem("token");
-    if (token) {
-      fetch("http://localhost:3000/move-card", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: token
-        },
-        body: JSON.stringify({
-          cardId: cardId,
-          oldCardList: oldCardList,
-          newCardList: newCardList,
-          oldCardPosition: oldCardPosition,
-          newCardPosition: newCardPosition
-        })
-      })
-        .then(response => response.json())
-        .then(card => {
-          if (card.card_id === cardId) {
-            this.displayLists();
+    // Move card first then send to server
+    let movingCard = null;
+    // Map to find the list where the card to be moved comes from
+    let clonedCardLists = _.cloneDeep(this.state.cardLists);
+    let newCardLists = clonedCardLists.map(list => {
+      if (list.listId === oldCardList) {
+        // Filter the list of cards to remove the card
+        const newCards = list.cards.filter(card => {
+          if (card.cardId === cardId) {
+            movingCard = card;
           }
+          return card.cardId !== cardId;
         });
-    }
+        list.cards = newCards;
+      }
+      return list;
+    });
+
+    //Add card to be moved into its destination list and position
+    newCardLists = newCardLists.map(list => {
+      if (list.listId === newCardList) {
+        list.cards.splice(newCardPosition, 0, movingCard);
+      }
+      return list;
+    });
+
+    newCardLists = this.updatePositions(oldCardList, newCardList, newCardLists);
+    this.setState({ cardLists: newCardLists });
+
+    // const token = window.sessionStorage.getItem("token");
+    // if (token) {
+    //   fetch("http://localhost:3000/move-card", {
+    //     method: "post",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //       Authorization: token
+    //     },
+    //     body: JSON.stringify({
+    //       cardId: cardId,
+    //       oldCardList: oldCardList,
+    //       newCardList: newCardList,
+    //       oldCardPosition: oldCardPosition,
+    //       newCardPosition: newCardPosition
+    //     })
+    //   })
+    //     .then(response => response.json())
+    //     .then(card => {
+    //       if (card.card_id === cardId) {
+    //         this.displayLists();
+    //       }
+    //     });
+    // }
   };
 
   render() {

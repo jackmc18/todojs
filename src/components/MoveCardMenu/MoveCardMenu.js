@@ -28,7 +28,8 @@ const styles = {
 const initialState = {
   moveToPosition: null,
   moveToList: null,
-  availablePositions: []
+  availablePositions: [],
+  availableLists: []
 };
 
 class MoveCardMenu extends React.Component {
@@ -36,6 +37,7 @@ class MoveCardMenu extends React.Component {
 
   componentWillMount() {
     this.addPositions();
+    this.addLists();
   }
 
   addPositions = () => {
@@ -50,9 +52,21 @@ class MoveCardMenu extends React.Component {
     });
   };
 
+  addLists = () => {
+    const listNames = this.props.lists.map(list => {
+      return list.listName;
+    });
+    this.setState({
+      availableLists: listNames,
+      moveToList: this.props.listId
+    });
+  };
+
   handleChange = event => {
     if (event.target.name === "move-position") {
       this.setState({ moveToPosition: event.target.value });
+    } else if (event.target.name === "move-list") {
+      this.setState({ moveToList: event.target.value });
     }
   };
 
