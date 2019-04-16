@@ -70,17 +70,6 @@ class MoveCardMenu extends React.Component {
     }
   };
 
-  handleClickMove = () => {
-    this.props.handleMoveCard(
-      this.props.cardId,
-      this.props.listId,
-      this.state.moveToList,
-      this.props.cardPosition,
-      this.state.moveToPosition
-    );
-    this.props.handleCloseMove();
-  };
-
   render() {
     const { classes } = this.props;
     const listPositions = this.state.availablePositions.map(position => {
@@ -121,7 +110,19 @@ class MoveCardMenu extends React.Component {
             </Select>
           </FormControl>
         </form>
-        <Button className={classes.menuButton} onClick={this.handleClickMove}>
+        <Button
+          className={classes.menuButton}
+          onClick={() => {
+            this.props.handleMoveCard(
+              this.props.cardId,
+              this.props.listId,
+              this.state.moveToList,
+              this.props.cardPosition,
+              this.state.moveToPosition
+            );
+            this.props.handleCloseMove();
+          }}
+        >
           <Typography>Move</Typography>
         </Button>
       </Card>
