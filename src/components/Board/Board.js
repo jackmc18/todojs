@@ -319,6 +319,22 @@ class Board extends React.Component {
     }
   };
 
+  onDeleteBoard = boardId => {
+    fetch("http://localhost:3000/delete-board", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        boardId: boardId
+      })
+    })
+      .then(response => response.json())
+      .then(() => {
+        console.log("deleted board");
+      });
+  };
+
   render() {
     const { classes } = this.props;
     const { board } = this.state;
@@ -342,6 +358,9 @@ class Board extends React.Component {
       <div className={classes.board}>
         <Typography component="h2" variant="h6">
           {board.boardName}
+          <Button onClick={() => this.onDeleteBoard(board.boardId)}>
+            Delete
+          </Button>
         </Typography>
 
         <ul className={classes.boardLists}>
