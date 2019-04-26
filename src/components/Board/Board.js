@@ -31,7 +31,7 @@ const styles = theme => ({
 const initialState = {
   board: {
     boardId: null,
-    boardName: "Untitled"
+    boardName: ""
   },
   cardLists: [],
   addListToggle: false,
@@ -61,10 +61,14 @@ class Board extends React.Component {
       })
         .then(response => response.json())
         .then(board => {
-          this.setState({
-            board: { boardId: board.boardId, boardName: board.boardName },
-            cardLists: board.lists
-          });
+          if (board.boardId === id) {
+            this.setState({
+              board: { boardId: board.boardId, boardName: board.boardName },
+              cardLists: board.lists
+            });
+          } else {
+            this.props.history.push(`/boardlist`);
+          }
         });
     }
   };
@@ -312,7 +316,6 @@ class Board extends React.Component {
         .then(response => response.json())
         .then(card => {
           if (card.card_id !== cardId) {
-            console.log("This is wrong");
             this.displayLists();
           }
         });
