@@ -320,7 +320,6 @@ class Board extends React.Component {
   };
 
   onDeleteBoard = boardId => {
-    console.log(boardId);
     fetch("http://localhost:3000/delete-board", {
       method: "post",
       headers: {
@@ -330,7 +329,9 @@ class Board extends React.Component {
         boardId: boardId
       })
     }).then(res => {
-      console.log(res);
+      if (res.status === 200) {
+        this.props.history.push(`/boardlist`);
+      }
     });
   };
 
