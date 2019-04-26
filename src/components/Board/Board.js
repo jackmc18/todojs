@@ -25,6 +25,9 @@ const styles = theme => ({
   },
   list: {
     paddingLeft: 10
+  },
+  deleteButton: {
+    float: "right"
   }
 });
 
@@ -361,7 +364,10 @@ class Board extends React.Component {
       <div className={classes.board}>
         <Typography component="h2" variant="h6">
           {board.boardName}
-          <Button onClick={() => this.onDeleteBoard(board.boardId)}>
+          <Button
+            className={classes.deleteButton}
+            onClick={() => this.onDeleteBoard(board.boardId)}
+          >
             Delete
           </Button>
         </Typography>
