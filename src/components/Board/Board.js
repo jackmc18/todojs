@@ -320,6 +320,7 @@ class Board extends React.Component {
   };
 
   onDeleteBoard = boardId => {
+    console.log(boardId);
     fetch("http://localhost:3000/delete-board", {
       method: "post",
       headers: {
@@ -328,11 +329,9 @@ class Board extends React.Component {
       body: JSON.stringify({
         boardId: boardId
       })
-    })
-      .then(response => response.json())
-      .then(() => {
-        console.log("deleted board");
-      });
+    }).then(res => {
+      console.log(res);
+    });
   };
 
   render() {
