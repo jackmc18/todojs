@@ -53,12 +53,17 @@ class MoveCardMenu extends React.Component {
   };
 
   addLists = () => {
+    let toList = "";
     const listNames = this.props.lists.map(list => {
+      if (list.listId === this.props.listId) {
+        toList = list.listName;
+      }
       return list.listName;
     });
+
     this.setState({
       availableLists: listNames,
-      moveToList: this.props.listId
+      moveToList: toList
     });
   };
 
@@ -79,21 +84,27 @@ class MoveCardMenu extends React.Component {
         </MenuItem>
       );
     });
+    const menuPositions = this.state.availableLists.map(position => {
+      return (
+        <MenuItem value={position} key={position}>
+          <em>{position}</em>
+        </MenuItem>
+      );
+    });
     return (
       <Card className={classes.moveCard}>
         <form className={classes.moveForm}>
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="move-list">List</InputLabel>
             <Select
-              value=""
+              value={this.state.moveToList}
+              onChange={this.handleChange}
               inputProps={{
                 name: "move-list",
                 id: "move-list"
               }}
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
+              {menuPositions}
             </Select>
           </FormControl>
           <FormControl className={classes.formControl}>
