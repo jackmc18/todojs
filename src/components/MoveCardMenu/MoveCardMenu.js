@@ -54,15 +54,19 @@ class MoveCardMenu extends React.Component {
 
   addLists = () => {
     let toList = "";
-    const listNames = this.props.lists.map(list => {
+    const lists = this.props.lists.map(list => {
       if (list.listId === this.props.listId) {
-        toList = list.listName;
+        toList = list.listId;
       }
-      return list.listName;
+      let listObj = {
+        listName: list.listName,
+        listId: list.listId
+      };
+      return listObj;
     });
 
     this.setState({
-      availableLists: listNames,
+      availableLists: lists,
       moveToList: toList
     });
   };
@@ -73,6 +77,7 @@ class MoveCardMenu extends React.Component {
     } else if (event.target.name === "move-list") {
       this.setState({ moveToList: event.target.value });
     }
+    console.log(this.state.moveToList);
   };
 
   render() {
@@ -86,8 +91,8 @@ class MoveCardMenu extends React.Component {
     });
     const menuPositions = this.state.availableLists.map(position => {
       return (
-        <MenuItem value={position} key={position}>
-          <em>{position}</em>
+        <MenuItem value={position.listId} key={position.listId}>
+          <em>{position.listName}</em>
         </MenuItem>
       );
     });

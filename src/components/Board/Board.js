@@ -273,6 +273,7 @@ class Board extends React.Component {
     oldCardPosition,
     newCardPosition
   ) => {
+    // console.log("moving card: ", cardId, " from list: ", oldCardList, " to list: ", newCardList )
     // Move card first then send to server
     let movingCard = null;
     // Map to find the list where the card to be moved comes from
@@ -290,14 +291,18 @@ class Board extends React.Component {
       }
       return list;
     });
+    console.log("remove from list: ", newCardLists);
 
     //Add card to be moved into its destination list and position
+    console.log(newCardList);
     newCardLists = newCardLists.map(list => {
       if (list.listId === newCardList) {
         list.cards.splice(newCardPosition, 0, movingCard);
+        console.log("spliced card");
       }
       return list;
     });
+    console.log("added to list: ", newCardLists);
 
     newCardLists = this.updatePositions(oldCardList, newCardList, newCardLists);
     this.setState({ cardLists: newCardLists });
