@@ -73,6 +73,8 @@ class Board extends React.Component {
             this.props.history.push(`/boardlist`);
           }
         });
+    } else {
+      this.props.history.push(`/`);
     }
   };
 
