@@ -36,15 +36,20 @@ class MoveCardMenu extends React.Component {
   state = initialState;
 
   componentWillMount() {
-    this.addPositions();
+    this.addPositions(this.props.listId);
     this.addLists();
   }
 
-  addPositions = () => {
-    const list = this.props.lists.filter(
-      list => list.listId === this.props.listId
-    );
-    const listLength = list[0].cards.length;
+  componentDidUpdate() {
+    console.log("state:", this.state);
+  }
+
+  addPositions = listId => {
+    const list = this.props.lists.filter(list => list.listId === listId);
+    let listLength = list[0].cards.length;
+    if (listId !== this.props.listId) {
+      listLength++;
+    }
     let positions = Array.from(Array(listLength).keys());
     this.setState({
       availablePositions: positions,
@@ -75,9 +80,10 @@ class MoveCardMenu extends React.Component {
     if (event.target.name === "move-position") {
       this.setState({ moveToPosition: event.target.value });
     } else if (event.target.name === "move-list") {
+      console.log(event.target.value);
       this.setState({ moveToList: event.target.value });
+      this.addPositions(event.target.value);
     }
-    console.log(this.state.moveToList);
   };
 
   render() {
