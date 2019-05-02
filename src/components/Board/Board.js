@@ -292,7 +292,6 @@ class Board extends React.Component {
     });
 
     // Add card to be moved into its destination list and position
-    //console.log(newCardList);
     newCardLists = newCardLists.map(list => {
       if (list.listId === newCardList) {
         // insert movingCard at newCardPosition
