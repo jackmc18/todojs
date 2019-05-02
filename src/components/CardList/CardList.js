@@ -106,11 +106,12 @@ class CardList extends React.Component {
     this.setState({ openMoreMenu: true, openMoreAnchor: event.currentTarget });
   };
 
-  handleCloseMore = event => {
+  handleCloseMore = () => {
     this.setState({ openMoreMenu: false, openMoreAnchor: null });
   };
 
   onDeleteList = () => {
+    this.handleCloseMore();
     this.props.onDeleteList(this.state.listId);
   };
 

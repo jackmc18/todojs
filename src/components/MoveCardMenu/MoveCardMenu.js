@@ -36,15 +36,20 @@ class MoveCardMenu extends React.Component {
   state = initialState;
 
   componentWillMount() {
-    this.addPositions();
+    this.addPositions(this.props.listId);
     this.addLists();
   }
 
-  addPositions = () => {
-    const list = this.props.lists.filter(
-      list => list.listId === this.props.listId
-    );
-    const listLength = list[0].cards.length;
+  componentDidUpdate() {
+    console.log("state:", this.state);
+  }
+
+  addPositions = listId => {
+    const list = this.props.lists.filter(list => list.listId === listId);
+    let listLength = list[0].cards.length;
+    if (listId !== this.props.listId) {
+      listLength++;
+    }
     let positions = Array.from(Array(listLength).keys());
     this.setState({
       availablePositions: positions,
@@ -53,12 +58,21 @@ class MoveCardMenu extends React.Component {
   };
 
   addLists = () => {
-    const listNames = this.props.lists.map(list => {
-      return list.listName;
+    let toList = "";
+    const lists = this.props.lists.map(list => {
+      if (list.listId === this.props.listId) {
+        toList = list.listId;
+      }
+      let listObj = {
+        listName: list.listName,
+        listId: list.listId
+      };
+      return listObj;
     });
+
     this.setState({
-      availableLists: listNames,
-      moveToList: this.props.listId
+      availableLists: lists,
+      moveToList: toList
     });
   };
 
@@ -66,7 +80,9 @@ class MoveCardMenu extends React.Component {
     if (event.target.name === "move-position") {
       this.setState({ moveToPosition: event.target.value });
     } else if (event.target.name === "move-list") {
+      console.log(event.target.value);
       this.setState({ moveToList: event.target.value });
+      this.addPositions(event.target.value);
     }
   };
 
@@ -79,21 +95,27 @@ class MoveCardMenu extends React.Component {
         </MenuItem>
       );
     });
+    const menuPositions = this.state.availableLists.map(position => {
+      return (
+        <MenuItem value={position.listId} key={position.listId}>
+          <em>{position.listName}</em>
+        </MenuItem>
+      );
+    });
     return (
       <Card className={classes.moveCard}>
         <form className={classes.moveForm}>
           <FormControl className={classes.formControl}>
             <InputLabel htmlFor="move-list">List</InputLabel>
             <Select
-              value=""
+              value={this.state.moveToList}
+              onChange={this.handleChange}
               inputProps={{
                 name: "move-list",
                 id: "move-list"
               }}
             >
-              <MenuItem value="">
-                <em>None</em>
-              </MenuItem>
+              {menuPositions}
             </Select>
           </FormControl>
           <FormControl className={classes.formControl}>

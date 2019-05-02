@@ -25,13 +25,16 @@ const styles = theme => ({
   },
   list: {
     paddingLeft: 10
+  },
+  deleteButton: {
+    float: "right"
   }
 });
 
 const initialState = {
   board: {
     boardId: null,
-    boardName: "Untitled"
+    boardName: ""
   },
   cardLists: [],
   addListToggle: false,
@@ -61,11 +64,17 @@ class Board extends React.Component {
       })
         .then(response => response.json())
         .then(board => {
-          this.setState({
-            board: { boardId: board.boardId, boardName: board.boardName },
-            cardLists: board.lists
-          });
+          if (board.boardId === id) {
+            this.setState({
+              board: { boardId: board.boardId, boardName: board.boardName },
+              cardLists: board.lists
+            });
+          } else {
+            this.props.history.push(`/boardlist`);
+          }
         });
+    } else {
+      this.props.history.push(`/`);
     }
   };
 
@@ -282,9 +291,10 @@ class Board extends React.Component {
       return list;
     });
 
-    //Add card to be moved into its destination list and position
+    // Add card to be moved into its destination list and position
     newCardLists = newCardLists.map(list => {
       if (list.listId === newCardList) {
+        // insert movingCard at newCardPosition
         list.cards.splice(newCardPosition, 0, movingCard);
       }
       return list;
@@ -312,11 +322,26 @@ class Board extends React.Component {
         .then(response => response.json())
         .then(card => {
           if (card.card_id !== cardId) {
-            console.log("This is wrong");
             this.displayLists();
           }
         });
     }
+  };
+
+  onDeleteBoard = boardId => {
+    fetch("http://localhost:3000/delete-board", {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        boardId: boardId
+      })
+    }).then(res => {
+      if (res.status === 200) {
+        this.props.history.push(`/boardlist`);
+      }
+    });
   };
 
   render() {
@@ -342,6 +367,12 @@ class Board extends React.Component {
       <div className={classes.board}>
         <Typography component="h2" variant="h6">
           {board.boardName}
+          <Button
+            className={classes.deleteButton}
+            onClick={() => this.onDeleteBoard(board.boardId)}
+          >
+            Delete
+          </Button>
         </Typography>
 
         <ul className={classes.boardLists}>
